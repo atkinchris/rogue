@@ -1,36 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+
+import createStore from './store'
+import Board from './components/Board'
 
 import './index.css'
 
-const entities = {
-  '10,10': '•',
-  '11,11': '•',
-  '10,11': '#',
-}
+const mountElement = document.getElementById('root')
+const store = createStore()
 
-const Board = () => (
-  <div>
-    {
-      Object.keys(entities).map((key) => {
-        const [x, y] = key.split('.')
-        const style = {
-          textAlign: 'center',
-          width: '1em',
-          height: '1em',
-          position: 'absolute',
-          transform: `translate(${x}em, ${y}em)`,
-        }
-
-        return (
-          <div key={key} style={style}>{ entities[key] }</div>
-        )
-      })
-    }
-  </div>
+const App = () => (
+  <Provider store={store}>
+    <div className="panel">
+      <Board />
+    </div>
+  </Provider>
 )
 
 ReactDOM.render(
-  <Board />,
-  document.getElementById('root'),
+  <App />,
+  mountElement,
 )

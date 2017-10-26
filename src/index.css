@@ -1,5 +1,22 @@
-body {
+html,
+body,
+#root {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
   font-family: sans-serif;
+}
+
+.panel {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  position: relative;
+  width: 10em;
+  height: 10em;
 }
