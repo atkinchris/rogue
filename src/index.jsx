@@ -1,25 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import './index.css';
+import './index.css'
 
 const entities = {
-  '10.10': '•',
-  '11.11': '•',
-  '10.11': '#'
+  '10,10': '•',
+  '11,11': '•',
+  '10,11': '#',
 }
 
 const Board = () => (
   <div>
     {
-      Object.keys(entities).map(key => {
+      Object.keys(entities).map((key) => {
         const [x, y] = key.split('.')
         const style = {
           textAlign: 'center',
           width: '1em',
           height: '1em',
           position: 'absolute',
-          transform: `translate(${x}em, ${y}em)`
+          transform: `translate(${x}em, ${y}em)`,
         }
 
         return (
@@ -32,5 +32,5 @@ const Board = () => (
 
 ReactDOM.render(
   <Board />,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)
