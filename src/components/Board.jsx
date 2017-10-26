@@ -1,27 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const board = [
-  ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', '@', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-  ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-]
-
-const entities = board.reduce((out, row, y) => ({
-  ...out,
-  ...row.reduce((rowOut, cell, x) => ({
-    ...rowOut,
-    [`${x},${y}`]: cell,
-  }), {}),
-}), {})
-
-const Board = () => (
+const Board = ({ entities }) => (
   <div className="board">
     {
       Object.keys(entities).map((key) => {
@@ -44,4 +24,8 @@ const Board = () => (
   </div>
 )
 
-export default Board
+const mapStateToProps = state => ({
+  entities: state.board,
+})
+
+export default connect(mapStateToProps)(Board)
