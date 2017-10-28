@@ -1,0 +1,35 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  background: #D44F57;
+  color: #FFFFFF;
+}
+
+.panel {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  font-family: monospace;
+  font-size: 1.4em;
+  position: relative;
+  width: 10em;
+  height: 10em;
+}
+
+.entity {
+  position: absolute;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+}
+
+/*# sourceMappingURL=main.b32df196.css.map*/
