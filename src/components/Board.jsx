@@ -2,20 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Player from './Player'
+
 const Board = ({ entities }) => (
   <div className="board">
+    <Player />
     {
       entities.map(({ id, x, y, type }) => {
         const style = {
-          textAlign: 'center',
-          width: '1em',
-          height: '1em',
-          position: 'absolute',
           transform: `translate(${x}em, ${y}em)`,
         }
 
         return (
-          <div key={id} style={style}>{ type }</div>
+          <div key={id} style={style} className="entity">{ type }</div>
         )
       })
     }

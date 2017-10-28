@@ -24,3 +24,10 @@ body,
   width: 10em;
   height: 10em;
 }
+
+.entity {
+  position: absolute;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+}
