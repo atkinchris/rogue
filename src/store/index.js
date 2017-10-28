@@ -1,12 +1,11 @@
-import { createStore, combineReducers, compose } from 'redux'
+import { createStore, compose } from 'redux'
 
-import board from './board'
+import rootReducer from './reducers'
 
 const buildStore = () => {
   const middleware = compose(window.devToolsExtension ? window.devToolsExtension() : f => f)
-  const reducer = combineReducers({ board })
 
-  return createStore(reducer, middleware)
+  return createStore(rootReducer, middleware)
 }
 
 export default buildStore
