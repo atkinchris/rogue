@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack -p",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
