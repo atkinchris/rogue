@@ -1,6 +1,8 @@
-const movementMiddleware = store => next => (action) => {
+import { selectPlayer } from '../selectors'
+
+const movementMiddleware = ({ getState, dispatch }) => next => (action) => {
   if (action && action.type === 'input') {
-    const { player } = store.getState()
+    const player = selectPlayer(getState())
     let { x, y } = player
 
     switch (action.payload) {
@@ -20,7 +22,7 @@ const movementMiddleware = store => next => (action) => {
         break
     }
 
-    return store.dispatch({ type: 'move', payload: { x, y } })
+    return dispatch({ type: 'move', payload: { x, y } })
   }
 
   return next(action)
