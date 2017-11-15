@@ -5,7 +5,7 @@ const collisionMiddleware = ({ getState }) => next => (action) => {
     const entities = selectEntitiesByCoord(getState())
     const { x, y } = action.payload
 
-    if (entities[x] && entities[x][y]) {
+    if (entities[x] && entities[x][y] && entities[x][y].type !== '.') {
       return null
     }
   }

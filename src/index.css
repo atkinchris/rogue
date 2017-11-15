@@ -6,7 +6,7 @@ body,
   height: 100%;
   width: 100%;
   font-family: sans-serif;
-  background: #D44F57;
+  background: #000000;
   color: #FFFFFF;
 }
 
@@ -19,6 +19,7 @@ body,
 
 .board {
   font-family: monospace;
+  font-weight: 300;
   font-size: 1.4em;
   position: relative;
   width: 10em;
@@ -30,4 +31,5 @@ body,
   text-align: center;
   width: 1em;
   height: 1em;
+  background: #000000;
 }

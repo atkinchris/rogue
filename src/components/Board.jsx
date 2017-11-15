@@ -6,7 +6,6 @@ import Player from './Player'
 
 const Board = ({ entities }) => (
   <div className="board">
-    <Player />
     {
       entities.map(({ id, x, y, type }) => {
         const style = {
@@ -18,6 +17,7 @@ const Board = ({ entities }) => (
         )
       })
     }
+    <Player />
   </div>
 )
 
