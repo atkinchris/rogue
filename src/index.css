@@ -1,6 +1,5 @@
 html,
-body,
-#root {
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -10,26 +9,8 @@ body,
   color: #FFFFFF;
 }
 
-.panel {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.board {
-  font-family: monospace;
-  font-weight: 300;
-  font-size: 1.4em;
-  position: relative;
-  width: 10em;
-  height: 10em;
-}
-
-.entity {
-  position: absolute;
-  text-align: center;
-  width: 1em;
-  height: 1em;
-  background: #000000;
+#canvas {
+  margin-left: 50vw;
+  margin-top: 50vh;
+  transform: translate(-50%, -50%);
 }
