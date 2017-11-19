@@ -1,18 +1,21 @@
-const renderSystem = context => (store) => {
-  const entities = store.getEntitiesWith(['tile', 'position'])
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+const renderSystem = () => {
+  const canvas = document.getElementById('canvas')
+  const context = canvas.getContext('2d')
 
-  entities.forEach((entity) => {
-    const tile = store.getComponent(entity, 'tile')
-    const position = store.getComponent(entity, 'position')
+  return (store) => {
+    const entities = store.getEntitiesWith(['tile', 'position'])
+    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
 
-    // eslint-disable-next-line no-param-reassign
-    context.font = '20px monospace'
-    // eslint-disable-next-line no-param-reassign
-    context.fillStyle = 'white'
+    entities.forEach((entity) => {
+      const tile = store.getComponent(entity, 'tile')
+      const position = store.getComponent(entity, 'position')
 
-    context.fillText(tile.character, position.x * 20, (position.y * 20) + 20)
-  })
+      context.font = '20px monospace'
+      context.fillStyle = 'white'
+
+      context.fillText(tile.character, position.x * 20, (position.y * 20) + 20)
+    })
+  }
 }
 
 export default renderSystem

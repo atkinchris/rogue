@@ -1,5 +1,5 @@
-const playerControlSystem = getIntent => (store, breakLoop) => {
-  const intent = getIntent()
+const playerControlSystem = () => (store, breakLoop) => {
+  const intent = store.getCache('playerIntent')
 
   if (intent && intent.type) {
     const entities = store.getEntitiesWith(['playerControlled'])
@@ -17,6 +17,8 @@ const playerControlSystem = getIntent => (store, breakLoop) => {
   } else {
     breakLoop('No intent found')
   }
+
+  store.setCache('playerIntent', null)
 }
 
 export default playerControlSystem
