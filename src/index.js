@@ -4,6 +4,7 @@ import playerControlSystem from './systems/playerControl'
 import applyMovementSystem from './systems/applyMovement'
 import evaluateMovementSystem from './systems/evaluateMovement'
 import collisionSystem from './systems/collision'
+import cacheCollisionsSystem from './systems/cacheCollisions'
 import { createPlayer, createWall } from './assemblages'
 import runLoop from './utils/loop'
 import createInputHandler from './utils/inputHandler'
@@ -23,6 +24,7 @@ const getIntent = () => {
 }
 
 const systems = [
+  cacheCollisionsSystem(),
   playerControlSystem(getIntent),
   evaluateMovementSystem(),
   collisionSystem(),

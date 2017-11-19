@@ -4,6 +4,7 @@ class Store {
   constructor() {
     this.entities = {}
     this.components = {}
+    this.caches = {}
   }
 
   createEntity() {
@@ -11,6 +12,14 @@ class Store {
     this.entities[id] = true
 
     return id
+  }
+
+  setCache(key, cache) {
+    this.caches[key] = cache
+  }
+
+  getCache(key) {
+    return this.caches[key]
   }
 
   addComponent(entity, component, state = true) {

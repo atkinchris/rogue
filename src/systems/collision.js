@@ -1,18 +1,11 @@
 const collisionSystem = () => (store) => {
   const entities = store.getEntitiesWith(['moveIntent', 'collides'])
-  const geometry = store.getEntitiesWith(['position', 'collides'])
+  const collisionMap = store.getCache('collisions')
 
   entities.forEach((entity) => {
-    const nextPosition = store.getComponent(entity, 'moveIntent')
-    const willCollide = geometry.some((other) => {
-      const position = store.getComponent(other, 'position')
-      return (
-        position.x === nextPosition.x &&
-        position.y === nextPosition.y
-      )
-    })
+    const { x, y } = store.getComponent(entity, 'moveIntent')
 
-    if (willCollide) {
+    if (collisionMap[`${x},${y}`]) {
       store.removeComponent(entity, 'moveIntent')
     }
   })
