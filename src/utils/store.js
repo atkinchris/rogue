@@ -14,6 +14,12 @@ class Store {
     return id
   }
 
+  removeEntity(entity) {
+    this.entities[entity] = null
+
+    Object.keys(this.components).forEach(component => this.removeComponent(entity, component))
+  }
+
   setCache(key, cache) {
     this.caches[key] = cache
   }

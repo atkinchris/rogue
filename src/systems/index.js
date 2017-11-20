@@ -6,6 +6,8 @@ import collision from './collision'
 import cacheCollisions from './cacheCollisions'
 import bumpAttack from './bumpAttack'
 import attack from './attack'
+import damage from './damage'
+import death from './death'
 
 export default [
   cacheCollisions(),
@@ -15,5 +17,7 @@ export default [
   collision(),
   applyMovement(),
   attack(),
+  damage(),
+  death(),
   render(),
 ]
