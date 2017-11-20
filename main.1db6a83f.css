@@ -1,0 +1,2 @@
+body,html{margin:0;padding:0;height:100%;width:100%;font-family:sans-serif;background:#000;color:#fff}#canvas{margin-left:50vw;margin-top:50vh;transform:translate(-50%,-50%)}#controls{display:flex;flex-direction:column;align-items:center;position:fixed;left:50%;bottom:2vw;transform:translateX(-50%)}.control-button{max-height:60px;max-width:60px;width:13vw;height:13vw;margin:1.75vw 1vw;border:none;opacity:.25}
+/*# sourceMappingURL=main.1db6a83f.css.map*/
