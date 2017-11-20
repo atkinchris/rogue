@@ -15,6 +15,7 @@
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
     "test": "echo \"No Tests\"",
+    "lint": "eslint .",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
@@ -30,7 +31,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.4.0",
+    "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^2.30.1",
