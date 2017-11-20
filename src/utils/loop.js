@@ -1,8 +1,12 @@
 const runLoop = (store, systems) => {
+  const debug = store.getCache('debug')
   let loop = true
   let iteration = 0
   const breakLoop = (message) => {
-    console.warn(message)
+    if (debug) {
+      // eslint-disable-next-line no-console
+      console.warn(message)
+    }
     loop = false
   }
 

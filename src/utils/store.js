@@ -57,6 +57,7 @@ class Store {
   }
 
   debugComponents() {
+    // eslint-disable-next-line no-console
     console.log(this.components)
   }
 }
