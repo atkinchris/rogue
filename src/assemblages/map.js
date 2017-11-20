@@ -1,4 +1,9 @@
-import { createPlayer, createWall, createFloor } from './'
+import {
+  createPlayer,
+  createEnemy,
+  createWall,
+  createFloor,
+} from './'
 
 const MAP = [
   '          ',
@@ -6,7 +11,7 @@ const MAP = [
   '##......# ',
   '#...@...# ',
   '#.......# ',
-  '##......##',
+  '##....K.##',
   ' #.......#',
   ' #########',
 ]
@@ -22,6 +27,10 @@ const buildMap = store => MAP.forEach((row, y) => {
         createWall(store, { x, y })
         break
       case '.':
+        createFloor(store, { x, y })
+        break
+      case 'K':
+        createEnemy(store, { x, y })
         createFloor(store, { x, y })
         break
       default:

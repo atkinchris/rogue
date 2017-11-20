@@ -1,4 +1,4 @@
-const evaluateMovementSystem = () => (store, breakLoop) => {
+const evaluateMovement = () => (store, breakLoop) => {
   const entities = store.getEntitiesWith(['moveIntent', 'position'])
 
   entities.forEach((entity) => {
@@ -28,4 +28,4 @@ const evaluateMovementSystem = () => (store, breakLoop) => {
   })
 }
 
-export default evaluateMovementSystem
+export default evaluateMovement

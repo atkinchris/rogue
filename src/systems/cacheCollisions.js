@@ -6,7 +6,7 @@ const cacheCollisions = () => (store) => {
 
     return {
       ...map,
-      [`${x},${y}`]: true,
+      [`${x},${y}`]: entity,
     }
   }, {})
 

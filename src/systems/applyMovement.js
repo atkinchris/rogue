@@ -1,4 +1,4 @@
-const applyMovementSystem = () => (store) => {
+const applyMovement = () => (store) => {
   const entities = store.getEntitiesWith(['moveIntent', 'position'])
 
   entities.forEach((entity) => {
@@ -9,4 +9,4 @@ const applyMovementSystem = () => (store) => {
   })
 }
 
-export default applyMovementSystem
+export default applyMovement

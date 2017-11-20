@@ -1,4 +1,4 @@
-const playerControlSystem = () => (store, breakLoop) => {
+const playerControl = () => (store, breakLoop) => {
   const intent = store.getCache('playerIntent')
 
   if (intent && intent.type) {
@@ -21,4 +21,4 @@ const playerControlSystem = () => (store, breakLoop) => {
   store.setCache('playerIntent', null)
 }
 
-export default playerControlSystem
+export default playerControl

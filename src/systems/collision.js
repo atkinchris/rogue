@@ -1,4 +1,4 @@
-const collisionSystem = () => (store) => {
+const collision = () => (store) => {
   const entities = store.getEntitiesWith(['moveIntent', 'collides'])
   const collisionMap = store.getCache('collisions')
 
@@ -11,4 +11,4 @@ const collisionSystem = () => (store) => {
   })
 }
 
-export default collisionSystem
+export default collision
