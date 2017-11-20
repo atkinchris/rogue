@@ -3,6 +3,7 @@ import systems from './systems'
 import runLoop from './utils/loop'
 import createInputHandler from './utils/inputHandler'
 import buildMap from './assemblages/map'
+import buildOnScreenControls from './utils/onScreenControls'
 
 import './index.css'
 
@@ -15,3 +16,5 @@ createInputHandler((direction) => {
 
 buildMap(store)
 runLoop(store, systems)
+
+buildOnScreenControls()
