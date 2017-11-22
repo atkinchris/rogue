@@ -31,6 +31,15 @@ const createWall = (store, position) => {
   return entity
 }
 
+const createDoor = (store, position) => {
+  const entity = store.createEntity()
+
+  store.addComponent(entity, 'position', position)
+  store.addComponent(entity, 'tile', { character: '+' })
+
+  return entity
+}
+
 const createFloor = (store, position) => {
   const entity = store.createEntity()
 
@@ -53,6 +62,7 @@ export {
   createPlayer,
   createEnemy,
   createWall,
+  createDoor,
   createFloor,
   createGravestone,
 }
