@@ -1,19 +1,25 @@
-import playerControl from './playerControl'
 import applyMovement from './applyMovement'
-import evaluateMovement from './evaluateMovement'
-import collision from './collision'
-import cacheCollisions from './cacheCollisions'
+import attack from './attack'
 import bumpAttack from './bumpAttack'
 import bumpOpenDoors from './bumpOpenDoors'
-import attack from './attack'
+import cacheCollisions from './cacheCollisions'
+import collision from './collision'
+import cpuTurn from './cpuTurn'
 import damage from './damage'
 import death from './death'
+import debug from './debug'
+import energy from './energy'
+import evaluateMovement from './evaluateMovement'
+import playerControl from './playerControl'
 
 // import renderCanvas from './render'
 import renderReact from './renderReact'
 
 export default [
+  debug(),
   cacheCollisions(),
+  energy(),
+  cpuTurn(),
   playerControl(),
   evaluateMovement(),
   bumpAttack(),

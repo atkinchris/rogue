@@ -2,12 +2,13 @@ const playerControl = () => (store, breakLoop) => {
   const intent = store.getCache('playerIntent')
 
   if (intent && intent.type) {
-    const entities = store.getEntitiesWith(['playerControlled'])
+    const entities = store.getEntitiesWith(['playerControlled', 'hasTurn'])
 
     entities.forEach((entity) => {
       switch (intent.type) {
         case 'move':
           store.addComponent(entity, 'moveIntent', intent)
+          store.removeComponent(entity, 'hasTurn')
           break
         default:
           breakLoop('Invalid intent from ', entity)
@@ -15,7 +16,7 @@ const playerControl = () => (store, breakLoop) => {
       }
     })
   } else {
-    breakLoop('No intent found')
+    // breakLoop('No intent found')
   }
 
   store.setCache('playerIntent', null)

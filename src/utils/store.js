@@ -1,10 +1,13 @@
 import { v4 as uuid } from 'uuid'
 
+import Queue from './queue'
+
 class Store {
   constructor() {
     this.entities = {}
     this.components = {}
     this.caches = {}
+    this.energyQueue = new Queue()
   }
 
   createEntity() {
