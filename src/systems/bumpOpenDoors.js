@@ -6,10 +6,14 @@ const bumpOpenDoors = () => (store) => {
     const { x, y } = store.getComponent(entity, 'moveIntent')
     const collidingEntity = collisionMap[`${x},${y}`]
 
-    if (collidingEntity && store.getComponent(collidingEntity, 'isDoor')) {
-      store.removeComponent(entity, 'moveIntent')
+    if (
+      collidingEntity &&
+      store.getComponent(collidingEntity, 'type') === 'doorClosed'
+    ) {
+      store.addComponent(collidingEntity, 'type', 'doorOpen')
       store.removeComponent(collidingEntity, 'collides')
-      store.addComponent(collidingEntity, 'tile', { character: '\'' })
+
+      store.removeComponent(entity, 'moveIntent')
     }
   })
 }

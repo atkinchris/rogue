@@ -8,11 +8,11 @@ const renderReact = () => {
 
   return (store) => {
     const entities = store
-      .getEntitiesWith(['tile', 'position'])
+      .getEntitiesWith(['visible', 'position'])
       .map(id => ({
         id,
-        ...store.getComponent(id, 'position'),
-        ...store.getComponent(id, 'tile'),
+        type: store.getComponent(id, 'type'),
+        position: store.getComponent(id, 'position'),
       }))
 
     render(

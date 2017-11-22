@@ -1,6 +1,6 @@
 import {
   createPlayer,
-  createEnemy,
+  createMonster,
   createWall,
   createDoor,
   createFloor,
@@ -37,7 +37,7 @@ const buildMap = store => MAP.forEach((row, y) => {
         createFloor(store, { x, y })
         break
       case 'K':
-        createEnemy(store, { x, y })
+        createMonster(store, { x, y })
         createFloor(store, { x, y })
         break
       default:

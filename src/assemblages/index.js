@@ -1,8 +1,9 @@
 const createPlayer = (store, position) => {
   const entity = store.createEntity()
 
+  store.addComponent(entity, 'type', 'player')
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '@', layer: 3 })
+  store.addComponent(entity, 'visible')
   store.addComponent(entity, 'playerControlled')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'canAttack')
@@ -11,11 +12,12 @@ const createPlayer = (store, position) => {
   return entity
 }
 
-const createEnemy = (store, position) => {
+const createMonster = (store, position) => {
   const entity = store.createEntity()
 
+  store.addComponent(entity, 'type', 'monster')
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: 'K', layer: 2 })
+  store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'health', { value: 3 })
 
@@ -25,8 +27,9 @@ const createEnemy = (store, position) => {
 const createWall = (store, position) => {
   const entity = store.createEntity()
 
+  store.addComponent(entity, 'type', 'wall')
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '#' })
+  store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')
 
   return entity
@@ -35,8 +38,9 @@ const createWall = (store, position) => {
 const createDoor = (store, position) => {
   const entity = store.createEntity()
 
+  store.addComponent(entity, 'type', 'doorClosed')
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '+' })
+  store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'isDoor')
 
@@ -46,15 +50,16 @@ const createDoor = (store, position) => {
 const createFloor = (store, position) => {
   const entity = store.createEntity()
 
+  store.addComponent(entity, 'type', 'floor')
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '.' })
+  store.addComponent(entity, 'visible')
 
   return entity
 }
 
 export {
   createPlayer,
-  createEnemy,
+  createMonster,
   createWall,
   createDoor,
   createFloor,

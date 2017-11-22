@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import tiles from './tiles'
+
 const Board = ({ entities }) => (
   <div className="board">
     {
-      entities.map(({ id, x, y, layer = 0, character }) => {
+      entities.map(({ id, type, position: { x, y } }) => {
+        const { character, layer = 0 } = tiles[type]
         const style = {
           transform: `translate(${x}em, ${y}em)`,
           zIndex: layer,
@@ -20,10 +23,11 @@ const Board = ({ entities }) => (
 Board.propTypes = {
   entities: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
-    character: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-    layer: PropTypes.number,
+    type: PropTypes.string,
+    position: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
   })).isRequired,
 }
 
