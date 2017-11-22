@@ -1,6 +1,6 @@
 const TILE_SIZE = 20
 
-const render = () => {
+const renderCanvas = () => {
   const canvas = document.getElementById('canvas')
   const context = canvas.getContext('2d')
   const layers = []
@@ -44,4 +44,4 @@ const render = () => {
   }
 }
 
-export default render
+export default renderCanvas

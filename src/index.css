@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -33,4 +34,28 @@ body {
   margin: 1.75vw 1vw;
   border: none;
   opacity: 0.25;
+}
+
+.panel {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  font-family: monospace;
+  font-weight: 300;
+  font-size: 1.4em;
+  position: relative;
+  width: 10em;
+  height: 10em;
+}
+
+.entity {
+  position: absolute;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+  background: #000000;
 }
