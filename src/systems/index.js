@@ -4,6 +4,7 @@ import evaluateMovement from './evaluateMovement'
 import collision from './collision'
 import cacheCollisions from './cacheCollisions'
 import bumpAttack from './bumpAttack'
+import bumpOpenDoors from './bumpOpenDoors'
 import attack from './attack'
 import damage from './damage'
 import death from './death'
@@ -16,6 +17,7 @@ export default [
   playerControl(),
   evaluateMovement(),
   bumpAttack(),
+  bumpOpenDoors(),
   collision(),
   applyMovement(),
   attack(),

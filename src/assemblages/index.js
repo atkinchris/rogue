@@ -6,6 +6,7 @@ const createPlayer = (store, position) => {
   store.addComponent(entity, 'playerControlled')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'canAttack')
+  store.addComponent(entity, 'canOpenDoors')
 
   return entity
 }
@@ -36,6 +37,8 @@ const createDoor = (store, position) => {
 
   store.addComponent(entity, 'position', position)
   store.addComponent(entity, 'tile', { character: '+' })
+  store.addComponent(entity, 'collides')
+  store.addComponent(entity, 'isDoor')
 
   return entity
 }
