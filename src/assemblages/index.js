@@ -49,20 +49,10 @@ const createFloor = (store, position) => {
   return entity
 }
 
-const createGravestone = (store, position) => {
-  const entity = store.createEntity()
-
-  store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '✝', layer: 1 })
-
-  return entity
-}
-
 export {
   createPlayer,
   createEnemy,
   createWall,
   createDoor,
   createFloor,
-  createGravestone,
 }
