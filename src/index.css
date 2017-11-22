@@ -44,9 +44,9 @@ body,
 }
 
 .board {
-  font-family: monospace;
+  font-family: 'Source Code Pro', monospace;
   font-weight: 300;
-  font-size: 1.4em;
+  font-size: 1.3rem;
   position: relative;
   width: 10em;
   height: 10em;

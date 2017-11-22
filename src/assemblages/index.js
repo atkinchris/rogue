@@ -2,7 +2,7 @@ const createPlayer = (store, position) => {
   const entity = store.createEntity()
 
   store.addComponent(entity, 'position', position)
-  store.addComponent(entity, 'tile', { character: '@', layer: 2 })
+  store.addComponent(entity, 'tile', { character: '@', layer: 3 })
   store.addComponent(entity, 'playerControlled')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'canAttack')
