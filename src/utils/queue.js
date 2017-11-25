@@ -3,25 +3,13 @@ class Queue {
     this.queue = []
   }
 
-  list() {
-    return this.queue
-  }
-
   enqueue(item) {
     if (!this.isQueued(item)) {
       this.queue.push(item)
     }
   }
 
-  dequeue() {
-    return this.queue.shift()
-  }
-
-  isQueued(item) {
-    return this.queue.indexOf(item) !== -1
-  }
-
-  remove(item) {
+  dequeue(item) {
     const index = this.queue.indexOf(item)
 
     if (index !== -1) {
@@ -29,8 +17,16 @@ class Queue {
     }
   }
 
+  isQueued(item) {
+    return this.queue.indexOf(item) !== -1
+  }
+
+  toArray() {
+    return this.queue
+  }
+
   next() {
-    const item = this.dequeue()
+    const item = this.queue.shift()
     this.enqueue(item)
     return item
   }
