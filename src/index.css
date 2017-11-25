@@ -27,6 +27,14 @@ body,
   transform: translateX(-50%);
 }
 
+@media (min-width: 450px) {
+  #controls {
+    left: initial;
+    right: 2vw;
+    transform: none;
+  }
+}
+
 .control-button {
   max-height: 60px;
   max-width: 60px;
