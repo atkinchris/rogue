@@ -17,6 +17,21 @@ describe('queue', () => {
     ])
   })
 
+  it('does not add an item if it already is queued', () => {
+    const queue = new Queue()
+
+    queue.enqueue('entity-1')
+    queue.enqueue('entity-2')
+    queue.enqueue('entity-3')
+    queue.enqueue('entity-2')
+
+    expect(queue.toArray()).toEqual([
+      'entity-1',
+      'entity-2',
+      'entity-3',
+    ])
+  })
+
   it('removes an item from the queue', () => {
     const queue = new Queue()
 
