@@ -1,13 +1,14 @@
 import { v4 as uuid } from 'uuid'
 
-import Queue from './queue'
+import EnergyQueue from './energyQueue'
 
 class Store {
-  constructor() {
+  constructor({ debug } = {}) {
     this.entities = {}
     this.components = {}
     this.caches = {}
-    this.energyQueue = new Queue()
+    this.turnQueue = new EnergyQueue()
+    this.debug = debug
   }
 
   createEntity() {
@@ -57,6 +58,10 @@ class Store {
 
   getComponent(entity, component) {
     return this.components[component] && this.components[component][entity]
+  }
+
+  hasComponent(entity, component) {
+    return !!this.getComponent(entity, component)
   }
 
   debugComponents() {

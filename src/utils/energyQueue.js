@@ -11,7 +11,7 @@ class EnergyQueue extends Queue {
     this.threshold = threshold
   }
 
-  add(entity, { speed }) {
+  add(entity, { speed = 1 }) {
     this.speeds[entity] = speed
     this.values[entity] = 0
     return this.enqueue(entity)

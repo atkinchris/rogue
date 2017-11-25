@@ -1,5 +1,5 @@
 import Store from './utils/store'
-import Loop from './utils/loop'
+import buildLoop from './utils/buildLoop'
 import systems from './systems'
 import createInputHandler from './utils/inputHandler'
 import buildMap from './assemblages/map'
@@ -7,17 +7,14 @@ import buildOnScreenControls from './utils/onScreenControls'
 
 import './index.css'
 
-const store = new Store()
-const loop = new Loop()
-
-// store.debug = true
+const store = new Store({ debug: false })
+const runLoop = buildLoop({ systems, store })
+const player = buildMap(store)
 
 createInputHandler((direction) => {
-  store.setCache('playerIntent', { type: 'move', direction })
-  loop.run(store, systems)
+  runLoop({ type: 'move', direction, entity: player })
 })
 
-buildMap(store)
-loop.run(store, systems)
+runLoop({})
 
 buildOnScreenControls()
