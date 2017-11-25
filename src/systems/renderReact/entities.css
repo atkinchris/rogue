@@ -1,0 +1,21 @@
+.entity.e-wall {
+  color: #000000;
+  background: #343838;
+}
+
+.entity.e-floor {
+  color: #666666;
+}
+
+.entity.e-door-closed {
+  color: #ffffff;
+  background: #333333;
+}
+
+.entity.e-monster {
+  color: #E97F02;
+}
+
+.entity.e-player {
+  color: #AEE239;
+}

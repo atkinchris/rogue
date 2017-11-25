@@ -45,7 +45,7 @@ const createWall = (store, position) => {
 const createDoor = (store, position) => {
   const entity = store.createEntity()
 
-  store.addComponent(entity, 'type', 'doorClosed')
+  store.addComponent(entity, 'type', 'door-closed')
   store.addComponent(entity, 'position', position)
   store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')

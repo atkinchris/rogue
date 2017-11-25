@@ -6,8 +6,9 @@ body,
   height: 100%;
   width: 100%;
   font-family: sans-serif;
-  background: #000000;
+  background: #2c3030;
   color: #FFFFFF;
+  overflow: hidden;
 }
 
 #canvas {
@@ -55,7 +56,12 @@ body,
 .entity {
   position: absolute;
   text-align: center;
-  min-width: 1em;
-  min-height: 1em;
+  line-height: 1em;
+  min-width: 1.1em;
+  min-height: 1.1em;
   background: #000000;
+}
+
+.entity__character {
+  font-size: 0.9em;
 }

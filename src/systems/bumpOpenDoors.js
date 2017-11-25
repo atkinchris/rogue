@@ -8,9 +8,9 @@ const bumpOpenDoors = () => (store) => {
 
     if (
       collidingEntity &&
-      store.getComponent(collidingEntity, 'type') === 'doorClosed'
+      store.getComponent(collidingEntity, 'type') === 'door-closed'
     ) {
-      store.addComponent(collidingEntity, 'type', 'doorOpen')
+      store.addComponent(collidingEntity, 'type', 'door-open')
       store.removeComponent(collidingEntity, 'collides')
 
       store.removeComponent(entity, 'moveIntent')

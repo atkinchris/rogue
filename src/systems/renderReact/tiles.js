@@ -3,6 +3,6 @@ export default {
   floor: { character: '.' },
   player: { character: '@', layer: 3 },
   monster: { character: 'K', layer: 3 },
-  doorOpen: { character: '\'', layer: 2 },
-  doorClosed: { character: '+', layer: 2 },
+  'door-open': { character: '\'', layer: 2 },
+  'door-closed': { character: '+', layer: 2 },
 }
