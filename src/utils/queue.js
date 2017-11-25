@@ -21,6 +21,10 @@ class Queue {
     return this.queue.indexOf(item) !== -1
   }
 
+  peek() {
+    return this.queue[0]
+  }
+
   toArray() {
     return this.queue
   }

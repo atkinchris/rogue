@@ -64,4 +64,20 @@ describe('queue', () => {
     expect(queue.next()).toBe('entity-3')
     expect(queue.next()).toBe('entity-1')
   })
+
+  it('returns the next item in the queue, but does not move it', () => {
+    const queue = new Queue()
+
+    queue.enqueue('entity-1')
+    queue.enqueue('entity-2')
+    queue.enqueue('entity-3')
+
+    expect(queue.peek()).toBe('entity-1')
+
+    expect(queue.toArray()).toEqual([
+      'entity-1',
+      'entity-2',
+      'entity-3',
+    ])
+  })
 })
