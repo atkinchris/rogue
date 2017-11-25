@@ -42,4 +42,20 @@ describe('energyQueue', () => {
     expect(queue.next()).toBe('entity-2')
     expect(queue.next()).toBe('entity-3')
   })
+
+  it('peeks at the next entity without changing the queue', () => {
+    const queue = new EnergyQueue()
+
+    queue.add('entity-1', { speed: 5 })
+    queue.add('entity-2', { speed: 10 })
+    queue.add('entity-3', { speed: 5 })
+
+    expect(queue.peek()).toBe('entity-2')
+    expect(queue.toArray()).toEqual([
+      'entity-1',
+      'entity-2',
+      'entity-3',
+    ])
+    expect(queue.next()).toBe('entity-2')
+  })
 })

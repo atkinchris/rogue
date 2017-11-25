@@ -23,18 +23,37 @@ class EnergyQueue extends Queue {
     return this.dequeue(entity)
   }
 
+  peek() {
+    let iteration = 0
+    const { values, speeds, threshold } = this
+    let next = null
+    const test = e => (values[e] + (speeds[e] * iteration)) >= threshold
+
+    do {
+      iteration += 1
+      next = this.toArray().find(test)
+    } while (!next)
+
+    return next
+  }
+
   next() {
-    while (true) {
+    let next = null
+    const { values, speeds, threshold } = this
+
+    do {
       const entity = super.next()
-      const nextValue = this.values[entity] + this.speeds[entity]
+      const nextValue = values[entity] + speeds[entity]
 
-      if (nextValue >= this.threshold) {
-        this.values[entity] = 0
-        return entity
+      if (nextValue >= threshold) {
+        values[entity] = 0
+        next = entity
+      } else {
+        values[entity] = nextValue
       }
+    } while (!next)
 
-      this.values[entity] = nextValue
-    }
+    return next
   }
 }
 
