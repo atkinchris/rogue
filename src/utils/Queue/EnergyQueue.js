@@ -1,4 +1,4 @@
-import Queue from './queue'
+import Queue from './Queue'
 
 const DEFAULT_THRESHOLD = 10
 

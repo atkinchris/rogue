@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import EnergyQueue from './energyQueue'
+import { EnergyQueue } from './Queue'
 
 class Store {
   constructor({ debug } = {}) {

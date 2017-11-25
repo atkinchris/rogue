@@ -1,4 +1,4 @@
-import Queue from '../queue'
+import Queue from '../Queue'
 
 describe('queue', () => {
   it('creates a new turn queue', () => {

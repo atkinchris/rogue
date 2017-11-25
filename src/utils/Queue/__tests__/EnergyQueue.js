@@ -1,4 +1,4 @@
-import EnergyQueue from '../energyQueue'
+import EnergyQueue from '../EnergyQueue'
 
 describe('energyQueue', () => {
   it('adds an entity to the queue', () => {
