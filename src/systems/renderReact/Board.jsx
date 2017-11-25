@@ -11,7 +11,7 @@ const Board = ({ entities }) => (
       entities.map(({ id, type, position: { x, y } }) => {
         const { character, layer = 0 } = tiles[type]
         const style = {
-          transform: `translate(${x}em, ${y * 1.1}em)`,
+          transform: `translate(${x}em, ${y}em)`,
           zIndex: layer,
         }
         const className = `entity e-${type}`
