@@ -35,6 +35,10 @@ body,
   margin: 1.75vw 1vw;
   border: none;
   opacity: 0.25;
+  background: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 0;
 }
 
 .panel {
