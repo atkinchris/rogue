@@ -12,10 +12,7 @@ const store = new Store({ debug: false, middleware })
 const runLoop = buildLoop({ systems, store })
 const player = buildMap(store)
 
-createInputHandler((direction) => {
-  runLoop({ type: 'move', direction, entity: player })
-})
-
 runLoop({})
 
+createInputHandler(direction => runLoop({ type: 'move', direction, entity: player }))
 buildOnScreenControls()
