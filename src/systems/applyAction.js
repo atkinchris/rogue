@@ -1,4 +1,4 @@
-const playerControl = () => (store, action) => {
+const applyAction = () => (store, action) => {
   const { type, entity } = action
 
   switch (type) {
@@ -13,4 +13,4 @@ const playerControl = () => (store, action) => {
   }
 }
 
-export default playerControl
+export default applyAction
