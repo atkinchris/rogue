@@ -10,18 +10,12 @@
 
 .entity.e-floor {
   color: #666666;
-  background: #101010;
 }
 
 .entity.e-door-closed {
-  color: #FFFFFF;
   background: #666666;
 }
 
 .entity.e-monster {
   color: #E97F02;
-}
-
-.entity.e-player {
-  color: #66C97A;
 }
