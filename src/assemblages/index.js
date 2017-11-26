@@ -1,5 +1,3 @@
-import { addEnergy } from '../components/energy'
-
 const createPlayer = (store, position) => {
   const entity = store.createEntity()
 
@@ -10,8 +8,7 @@ const createPlayer = (store, position) => {
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'canAttack')
   store.addComponent(entity, 'canOpenDoors')
-
-  addEnergy(store, entity)
+  store.addComponent(entity, 'hasEnergy')
 
   return entity
 }
@@ -25,9 +22,6 @@ const createMonster = (store, position) => {
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'health', { value: 3 })
   store.addComponent(entity, 'cpuControlled')
-
-  // Removed until AI is built
-  // addEnergy(store, entity, { threshold: 1 })
 
   return entity
 }

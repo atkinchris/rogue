@@ -3,12 +3,13 @@ import { v4 as uuid } from 'uuid'
 import { EnergyQueue } from './Queue'
 
 class Store {
-  constructor({ debug } = {}) {
+  constructor({ debug, middleware = {} } = {}) {
     this.entities = {}
     this.components = {}
     this.caches = {}
     this.turnQueue = new EnergyQueue()
     this.debug = debug
+    this.middleware = { ...middleware }
   }
 
   createEntity() {
@@ -37,12 +38,22 @@ class Store {
       this.components[component] = {}
     }
 
+    const middleware = this.middleware[component]
+    if (middleware && middleware.onAdd) {
+      middleware.onAdd(this, entity, state)
+    }
+
     this.components[component][entity] = state
   }
 
   removeComponent(entity, component) {
     if (!this.components[component]) {
       this.components[component] = {}
+    }
+
+    const middleware = this.middleware[component]
+    if (middleware && middleware.onRemove) {
+      middleware.onRemove(this, entity)
     }
 
     this.components[component][entity] = null
