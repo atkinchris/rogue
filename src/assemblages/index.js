@@ -33,6 +33,7 @@ const createWall = (store, position) => {
   store.addComponent(entity, 'position', position)
   store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')
+  store.addComponent(entity, 'blocksSight')
 
   return entity
 }
@@ -45,6 +46,7 @@ const createDoor = (store, position) => {
   store.addComponent(entity, 'visible')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'isDoor')
+  store.addComponent(entity, 'blocksSight')
 
   return entity
 }

@@ -5,11 +5,19 @@
 
 .entity.e-wall {
   color: #101010;
-  background: #343838;
+  background: #343434;
+}
+
+.entity.e-wall.visible {
+  background: #888888;
 }
 
 .entity.e-floor {
   color: #666666;
+}
+
+.entity.e-floor.visible {
+  color: #FFFFFF;
 }
 
 .entity.e-door-closed {
