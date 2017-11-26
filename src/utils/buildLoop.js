@@ -1,7 +1,8 @@
-const buildLoop = ({ systems, store, ai = null }) => {
+const buildLoop = ({ systems = [], store = {}, caches = [], ai = null }) => {
   let isRunning = false
   const { turnQueue } = store
   const runSystem = action => system => system(store, action)
+  const runCache = entity => cache => cache(store, entity)
 
   return (playerAction) => {
     if (isRunning) return
@@ -17,8 +18,9 @@ const buildLoop = ({ systems, store, ai = null }) => {
       }
 
       const entity = turnQueue.next()
-      action = action || ai.getAction(entity, store)
+      caches.forEach(runCache(entity))
 
+      action = action || ai.getAction(entity, store)
       systems.forEach(runSystem(action))
 
       action = null
