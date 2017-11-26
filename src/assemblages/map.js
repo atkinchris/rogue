@@ -8,14 +8,14 @@ import {
 
 const MAP = [
   ' ######## ',
-  ' #...K..# ',
+  ' #...k..# ',
   ' #......# ',
   ' #......# ',
   ' ###+#### ',
   '##......# ',
   '#...@...# ',
   '#.......# ',
-  '##....K.##',
+  '##....k.##',
   ' #.......#',
   ' #########',
 ]
@@ -40,7 +40,7 @@ const buildMap = (store) => {
         case '.':
           createFloor(store, { x, y })
           break
-        case 'K':
+        case 'k':
           createMonster(store, { x, y })
           createFloor(store, { x, y })
           break
