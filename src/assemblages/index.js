@@ -7,7 +7,6 @@ const createPlayer = (store, position) => {
   store.addComponent(entity, 'playerControlled')
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'canAttack')
-  store.addComponent(entity, 'canOpenDoors')
   store.addComponent(entity, 'hasEnergy')
 
   return entity
@@ -41,11 +40,9 @@ const createWall = (store, position) => {
 const createDoor = (store, position) => {
   const entity = store.createEntity()
 
-  store.addComponent(entity, 'type', 'door-closed')
+  store.addComponent(entity, 'type', 'door')
   store.addComponent(entity, 'position', position)
   store.addComponent(entity, 'visible')
-  // store.addComponent(entity, 'collides')
-  store.addComponent(entity, 'isDoor')
   store.addComponent(entity, 'blocksSight')
 
   return entity
