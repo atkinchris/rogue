@@ -1,10 +1,10 @@
-import hasEnergy from './hasEnergy'
+import turnQueue from './turnQueue'
 
 export default {
   onAdd: [
-    hasEnergy.onAdd,
+    turnQueue.onAdd,
   ],
   onRemove: [
-    hasEnergy.onRemove,
+    turnQueue.onRemove,
   ],
 }

@@ -1,7 +1,8 @@
 const COMPONENT = 'hasEnergy'
 
-const onAdd = (store, component, entity, { speed } = {}) => {
+const onAdd = (store, component, entity, state) => {
   if (component === COMPONENT) {
+    const { speed } = state.next
     store.turnQueue.add(entity, { speed })
   }
 }

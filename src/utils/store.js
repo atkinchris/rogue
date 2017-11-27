@@ -41,8 +41,12 @@ class Store {
       this.components[component] = {}
     }
 
-    this.middleware.onAdd.forEach(m => m(this, component, entity, state))
-    this.components[component][entity] = state
+    const previous = this.components[component][entity]
+    const next = state
+
+    this.middleware.onAdd.forEach(m => m(this, component, entity, { previous, next }))
+
+    this.components[component][entity] = next
   }
 
   removeComponent(entity, component) {
@@ -51,7 +55,7 @@ class Store {
     }
 
     this.middleware.onRemove.forEach(m => m(this, component, entity))
-    this.components[component][entity] = null
+    delete this.components[component][entity]
   }
 
   getEntitiesWith(components) {
