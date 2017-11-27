@@ -7,6 +7,7 @@ import collision from './collision'
 import damage from './damage'
 import death from './death'
 import evaluateMovement from './evaluateMovement'
+import fieldOfVision from './fieldOfVision'
 
 // import renderCanvas from './render'
 import renderReact from './renderReact'
@@ -21,6 +22,7 @@ export default [
   attack(),
   damage(),
   death(),
+  fieldOfVision(),
   // renderCanvas(),
   renderReact(),
 ]

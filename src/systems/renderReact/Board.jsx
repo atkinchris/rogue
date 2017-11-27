@@ -5,7 +5,7 @@ import tiles from './tiles'
 
 import './entities.css'
 
-const Board = ({ entities }) => (
+const Board = ({ entities, vision }) => (
   <div className="board">
     {
       entities.map(({ id, type, position: { x, y } }) => {
@@ -14,7 +14,12 @@ const Board = ({ entities }) => (
           transform: `translate(${x}em, ${y}em)`,
           zIndex: layer,
         }
-        const className = `entity e-${type}`
+        let className = `entity e-${type}`
+
+        if (vision[`${x},${y}`]) {
+          className += ' visible'
+        }
+
         return (
           <div key={id} style={style} className={className}>
             <span className="entity__character">{ character }</span>
@@ -34,6 +39,7 @@ Board.propTypes = {
       y: PropTypes.number,
     }),
   })).isRequired,
+  vision: PropTypes.shape({}).isRequired,
 }
 
 export default Board

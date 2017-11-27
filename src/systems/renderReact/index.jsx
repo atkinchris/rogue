@@ -7,6 +7,7 @@ const renderReact = () => {
   const rootElement = document.getElementById('root')
 
   return (store) => {
+    const vision = store.getCache('vision')
     const entities = store
       .getEntitiesWith(['visible', 'position'])
       .map(id => ({
@@ -17,7 +18,7 @@ const renderReact = () => {
 
     render(
       <div className="panel">
-        <Board entities={entities} />
+        <Board entities={entities} vision={vision} />
       </div>,
       rootElement,
     )

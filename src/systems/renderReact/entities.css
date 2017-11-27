@@ -3,6 +3,14 @@
   background: #101010;
 }
 
+.entity:not(.visible) {
+  display: none;
+}
+
+.entity.e-player {
+  display: block !important;
+}
+
 .entity.e-wall {
   color: #101010;
   background: #343434;
