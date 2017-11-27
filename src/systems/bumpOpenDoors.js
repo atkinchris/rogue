@@ -12,7 +12,6 @@ const bumpOpenDoors = () => (store) => {
     ) {
       store.addComponent(collidingEntity, 'type', 'door-open')
       store.removeComponent(collidingEntity, 'collides')
-      store.removeComponent(collidingEntity, 'blocksSight')
 
       store.removeComponent(entity, 'moveIntent')
     }
