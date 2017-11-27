@@ -9,7 +9,10 @@ class Store {
     this.caches = {}
     this.turnQueue = new EnergyQueue()
     this.debug = debug
-    this.middleware = { ...middleware }
+    this.middleware = {
+      onAdd: [...middleware.onAdd],
+      onRemove: [...middleware.onRemove],
+    }
   }
 
   createEntity() {
@@ -38,11 +41,7 @@ class Store {
       this.components[component] = {}
     }
 
-    const middleware = this.middleware[component]
-    if (middleware && middleware.onAdd) {
-      middleware.onAdd(this, entity, state)
-    }
-
+    this.middleware.onAdd.forEach(m => m(this, component, entity, state))
     this.components[component][entity] = state
   }
 
@@ -51,11 +50,7 @@ class Store {
       this.components[component] = {}
     }
 
-    const middleware = this.middleware[component]
-    if (middleware && middleware.onRemove) {
-      middleware.onRemove(this, entity)
-    }
-
+    this.middleware.onRemove.forEach(m => m(this, component, entity))
     this.components[component][entity] = null
   }
 

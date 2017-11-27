@@ -1,15 +1,18 @@
 const COMPONENT = 'hasEnergy'
 
-const addEnergy = (store, entity, { speed } = {}) => {
-  store.turnQueue.add(entity, { speed })
+const onAdd = (store, component, entity, { speed } = {}) => {
+  if (component === COMPONENT) {
+    store.turnQueue.add(entity, { speed })
+  }
 }
 
-const removeEnergy = (store, entity) => {
-  store.turnQueue.remove(entity)
+const onRemove = (store, component, entity) => {
+  if (component === COMPONENT) {
+    store.turnQueue.remove(entity)
+  }
 }
 
 export default {
-  COMPONENT,
-  onAdd: addEnergy,
-  onRemove: removeEnergy,
+  onAdd,
+  onRemove,
 }
