@@ -1,11 +1,13 @@
+import posToString from '../utils/posToString'
+
 const collision = () => (store) => {
   const entities = store.getEntitiesWith(['moveIntent', 'collides'])
   const collisionMap = store.getCache('collisions')
 
   entities.forEach((entity) => {
-    const { x, y } = store.getComponent(entity, 'moveIntent')
+    const destination = store.getComponent(entity, 'moveIntent')
 
-    if (collisionMap[`${x},${y}`]) {
+    if (collisionMap[posToString(destination)]) {
       store.removeComponent(entity, 'moveIntent')
     }
   })

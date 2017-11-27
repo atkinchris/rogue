@@ -1,7 +1,7 @@
+import posToString from '../../utils/posToString'
 import Shadow from './Shadow'
 import ShadowLine from './ShadowLine'
 
-const posToString = ({ x, y }) => `${x},${y}`
 const OCTANTS = [
   [-1, 0, 0, 1],
   [0, -1, 1, 0],

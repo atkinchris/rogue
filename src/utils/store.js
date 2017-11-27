@@ -45,7 +45,6 @@ class Store {
     const next = state
 
     this.middleware.onAdd.forEach(m => m(this, component, entity, { previous, next }))
-
     this.components[component][entity] = next
   }
 

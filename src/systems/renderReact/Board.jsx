@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import posToString from '../../utils/posToString'
 import tiles from './tiles'
 
 import './entities.css'
@@ -8,7 +9,8 @@ import './entities.css'
 const Board = ({ entities, vision }) => (
   <div className="board">
     {
-      entities.map(({ id, type, position: { x, y } }) => {
+      entities.map(({ id, type, position }) => {
+        const { x, y } = position
         const { character, layer = 0 } = tiles[type]
         const style = {
           transform: `translate(${x}em, ${y}em)`,
@@ -16,7 +18,7 @@ const Board = ({ entities, vision }) => (
         }
         let className = `entity e-${type}`
 
-        if (vision[`${x},${y}`]) {
+        if (vision[posToString(position)]) {
           className += ' visible'
         }
 

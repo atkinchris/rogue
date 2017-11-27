@@ -1,5 +1,1 @@
-import collisions from './collisions'
-
-export default [
-  collisions(),
-]
+export default []
