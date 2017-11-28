@@ -4,6 +4,7 @@ const COLLIDES = 'collides'
 const POSITION = 'position'
 
 const onAdd = (store, component, entity, state) => {
+  if (component !== COLLIDES && component !== POSITION) return
   const collisionMap = store.getCache('collisions') || {}
 
   if (component === COLLIDES && store.hasComponent(entity, POSITION)) {
@@ -25,6 +26,7 @@ const onAdd = (store, component, entity, state) => {
 }
 
 const onRemove = (store, component, entity) => {
+  if (component !== COLLIDES && component !== POSITION) return
   const collisionMap = store.getCache('collisions') || {}
 
   if (
