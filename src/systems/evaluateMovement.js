@@ -1,4 +1,4 @@
-const evaluateMovement = () => (store, breakLoop) => {
+const evaluateMovement = () => (store) => {
   const entities = store.getEntitiesWith(['moveIntent', 'position'])
 
   entities.forEach((entity) => {
@@ -20,7 +20,6 @@ const evaluateMovement = () => (store, breakLoop) => {
         result.x += 1
         break
       default:
-        breakLoop('Invalid movement direction', entity)
         break
     }
 
