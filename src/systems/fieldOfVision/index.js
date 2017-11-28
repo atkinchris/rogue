@@ -19,42 +19,53 @@ const projectTile = (row, col) => {
   return new Shadow(topLeft, bottomRight)
 }
 
+const transformOctant = ({ x, y }, row, col, octant) => {
+  const [xx, xy, yx, yy] = OCTANTS[octant]
+
+  return {
+    x: x + (row * xx) + (col * xy),
+    y: y + (row * yx) + (col * yy),
+  }
+}
+
 const fieldOfVision = () => (store) => {
-  const entities = store.getEntitiesWith(['position', 'blocksSight'])
+  const entities = store.getEntitiesWith(['position'])
   const player = store.getEntitiesWith(['playerControlled'])[0]
-  const position = store.getComponent(player, 'position')
-  const maxDistance = 4
+  const playerPosition = store.getComponent(player, 'position')
+  const maxDistance = 10
 
   const visionMap = entities.reduce((map, entity) => {
     const pos = store.getComponent(entity, 'position')
+    const blocksSight = store.hasComponent(entity, 'blocksSight')
 
     return {
       ...map,
-      [posToString(pos)]: entity,
+      [posToString(pos)]: blocksSight,
     }
   }, {})
   const visibles = {}
   const addVisibility = (pos, visible) => { visibles[posToString(pos)] = visible }
   const blocksSight = pos => !!visionMap[posToString(pos)]
+  const isInBounds = pos => visionMap[posToString(pos)] !== undefined
 
   // Add player to visibility map
-  addVisibility(position, true)
+  addVisibility(playerPosition, true)
 
-  OCTANTS.forEach((octant) => {
-    const [xx, xy, yx, yy] = octant
+  OCTANTS.forEach((octant, octantIndex) => {
     const line = new ShadowLine()
     let fullShadow = false
 
     for (let row = 1; row < maxDistance; row += 1) {
+      const position = transformOctant(playerPosition, row, 0, octantIndex)
+      if (!isInBounds(position)) break
+
       for (let col = 0; col <= row; col += 1) {
-        const pos = {
-          x: position.x + (row * xx) + (col * xy),
-          y: position.y + (row * yx) + (col * yy),
-        }
+        const pos = transformOctant(playerPosition, row, col, octantIndex)
+        if (!isInBounds(pos)) break
 
         if (fullShadow) {
           addVisibility(pos, false)
-          return
+          break
         }
 
         const projection = projectTile(row, col)
@@ -63,7 +74,7 @@ const fieldOfVision = () => (store) => {
 
         if (isVisible && blocksSight(pos)) {
           line.add(projection)
-          fullShadow = line.isFullShadow
+          fullShadow = line.isFullShadow()
         }
       }
     }
