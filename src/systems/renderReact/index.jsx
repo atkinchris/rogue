@@ -14,13 +14,22 @@ const renderReact = () => {
       .getEntitiesWith(['visible', 'position'])
       .map((id) => {
         const position = store.getComponent(id, 'position')
+        const posString = posToString(position)
+        let visibleState
+
+        if (vision[posString]) {
+          visibleState = 'visible'
+        } else if (fogOfWar[posString] && store.hasComponent(id, 'visibleInFog')) {
+          visibleState = 'visibleInFog'
+        } else {
+          visibleState = 'hidden'
+        }
 
         return {
           id,
           type: store.getComponent(id, 'type'),
           position,
-          visible: vision[posToString(position)],
-          seen: fogOfWar[posToString(position)],
+          visibleState,
         }
       })
 

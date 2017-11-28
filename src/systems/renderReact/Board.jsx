@@ -8,22 +8,14 @@ import './entities.css'
 const Board = ({ entities }) => (
   <div className="board">
     {
-      entities.map(({ id, type, position, visible, seen }) => {
+      entities.map(({ id, type, position, visibleState }) => {
         const { x, y } = position
         const { character, layer = 0 } = tiles[type]
         const style = {
           transform: `translate(${x}em, ${y}em)`,
           zIndex: layer,
         }
-        let className = `entity e-${type}`
-
-        if (visible) {
-          className += ' visible'
-        }
-
-        if (seen) {
-          className += ' seen'
-        }
+        const className = `entity e-${type} ${visibleState}`
 
         return (
           <div key={id} style={style} className={className}>

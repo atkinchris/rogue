@@ -3,7 +3,7 @@
   background: #101010;
 }
 
-.entity:not(.seen) {
+.entity.hidden {
   display: none;
 }
 
