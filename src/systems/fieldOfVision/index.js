@@ -29,6 +29,7 @@ const transformOctant = ({ x, y }, row, col, octant) => {
 }
 
 const fieldOfVision = () => (store) => {
+  const fogOfWar = store.getCache('fogOfWar') || {}
   const entities = store.getEntitiesWith(['position'])
   const player = store.getEntitiesWith(['playerControlled'])[0]
   const playerPosition = store.getComponent(player, 'position')
@@ -44,7 +45,12 @@ const fieldOfVision = () => (store) => {
     }
   }, {})
   const visibles = {}
-  const addVisibility = (pos, visible) => { visibles[posToString(pos)] = visible }
+  const addVisibility = (pos, visible) => {
+    visibles[posToString(pos)] = visible
+    if (visible) {
+      fogOfWar[posToString(pos)] = true
+    }
+  }
   const blocksSight = pos => !!visionMap[posToString(pos)]
   const isInBounds = pos => visionMap[posToString(pos)] !== undefined
 
@@ -81,6 +87,7 @@ const fieldOfVision = () => (store) => {
   })
 
   store.setCache('vision', visibles)
+  store.setCache('fogOfWar', fogOfWar)
 }
 
 export default fieldOfVision
