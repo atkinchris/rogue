@@ -14,7 +14,7 @@ const OCTANTS = [
 ]
 
 const projectTile = (row, col) => {
-  const topLeft = col / (row + 2)
+  const topLeft = col / (row + 1)
   const bottomRight = (col + 1) / (row + 1)
   return new Shadow(topLeft, bottomRight)
 }
