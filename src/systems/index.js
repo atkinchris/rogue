@@ -8,9 +8,6 @@ import death from './death'
 import evaluateMovement from './evaluateMovement'
 import fieldOfVision from './fieldOfVision'
 
-// import renderCanvas from './renderCanvas'
-import renderReact from './renderReact'
-
 export default [
   applyAction(),
   evaluateMovement(),
@@ -21,6 +18,4 @@ export default [
   damage(),
   death(),
   fieldOfVision(),
-  // renderCanvas(),
-  renderReact(),
 ]

@@ -8,14 +8,14 @@ import './entities.css'
 const Board = ({ entities }) => (
   <div className="board">
     {
-      entities.map(({ id, type, position, visibleState }) => {
+      entities.map(({ id, type, position, visibility }) => {
         const { x, y } = position
         const { character, layer = 0 } = tiles[type]
         const style = {
           transform: `translate(${x}em, ${y}em)`,
           zIndex: layer,
         }
-        const className = `entity e-${type} ${visibleState}`
+        const className = `entity e-${type} ${visibility}`
 
         return (
           <div key={id} style={style} className={className}>
@@ -35,8 +35,8 @@ Board.propTypes = {
       x: PropTypes.number,
       y: PropTypes.number,
     }),
+    visibility: PropTypes.string.isRequired,
   })).isRequired,
-  vision: PropTypes.shape({}).isRequired,
 }
 
 export default Board
