@@ -8,6 +8,10 @@ const buildRenderer = ({ store }) => {
   return () => {
     const vision = store.getCache('vision')
     const fogOfWar = store.getCache('fogOfWar')
+    const bounds = {
+      width: 0,
+      height: 0,
+    }
     const entities = store
       .getEntitiesWith(['visible', 'position'])
       .map((id) => {
@@ -15,6 +19,14 @@ const buildRenderer = ({ store }) => {
         const posString = posToString(position)
         const type = store.getComponent(id, 'type')
         let visibility
+
+        if (position.x > bounds.width) {
+          bounds.width = position.x
+        }
+
+        if (position.y > bounds.height) {
+          bounds.height = position.y
+        }
 
         if (vision[posString]) {
           visibility = 'visible'
@@ -32,7 +44,7 @@ const buildRenderer = ({ store }) => {
         }
       })
 
-    render({ entities })
+    render({ entities, bounds })
   }
 }
 

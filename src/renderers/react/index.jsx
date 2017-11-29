@@ -6,9 +6,9 @@ import Board from './Board'
 const renderReact = () => {
   const rootElement = document.getElementById('root')
 
-  return ({ entities }) => render(
+  return ({ entities, bounds: { width, height } }) => render(
     <div className="panel">
-      <Board entities={entities} />
+      <Board entities={entities} width={width} height={height} />
     </div>,
     rootElement,
   )

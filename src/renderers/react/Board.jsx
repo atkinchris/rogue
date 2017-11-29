@@ -5,14 +5,22 @@ import tiles from './tiles'
 
 import './entities.css'
 
-const Board = ({ entities }) => (
-  <div className="board">
+const toWorld = n => `${n}em`
+
+const Board = ({ entities, width, height }) => (
+  <div
+    className="board"
+    style={{
+      width: toWorld(width + 1),
+      height: toWorld(height + 1),
+    }}
+  >
     {
       entities.map(({ id, type, position, visibility }) => {
         const { x, y } = position
         const { character, layer = 0 } = tiles[type]
         const style = {
-          transform: `translate(${x}em, ${y}em)`,
+          transform: `translate(${toWorld(x)}, ${toWorld(y)})`,
           zIndex: layer,
         }
         const className = `entity e-${type} ${visibility}`
@@ -37,6 +45,8 @@ Board.propTypes = {
     }),
     visibility: PropTypes.string.isRequired,
   })).isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 }
 
 export default Board
