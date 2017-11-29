@@ -11,7 +11,8 @@
   display: block !important;
 }
 
-.entity.e-wall {
+.entity.e-wall,
+.entity.e-door {
   color: #101010;
   background: #343434;
 }
@@ -28,7 +29,8 @@
   color: #FFFFFF;
 }
 
-.entity.e-door {
+.entity.e-door.visible {
+  color: #FFFFFF;
   background: #666666;
 }
 

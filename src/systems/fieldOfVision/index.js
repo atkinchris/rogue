@@ -33,7 +33,7 @@ const fieldOfVision = () => (store) => {
   const entities = store.getEntitiesWith(['position'])
   const player = store.getEntitiesWith(['playerControlled'])[0]
   const playerPosition = store.getComponent(player, 'position')
-  const maxDistance = 10
+  const maxDistance = 20
 
   const visionMap = entities.reduce((map, entity) => {
     const pos = store.getComponent(entity, 'position')
