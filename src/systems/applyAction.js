@@ -1,4 +1,6 @@
 const applyAction = () => (store, action) => {
+  if (!action) return
+
   const { type, entity } = action
 
   switch (type) {

@@ -22,7 +22,7 @@ const MAP = [
   ' ##############',
 ]
 
-const buildMap = (store) => {
+const buildMap = ({ store }) => {
   let player
 
   MAP.forEach((row, y) => {

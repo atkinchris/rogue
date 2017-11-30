@@ -21,6 +21,7 @@ const createMonster = (store, position) => {
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'health', { value: 3 })
   store.addComponent(entity, 'cpuControlled')
+  store.addComponent(entity, 'hasEnergy')
 
   return entity
 }

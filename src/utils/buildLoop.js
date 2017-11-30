@@ -1,4 +1,4 @@
-const buildLoop = ({ systems, store, renderer, ai = null }) => {
+const buildLoop = ({ systems, store, renderer, ai }) => {
   let isRunning = false
   const { turnQueue } = store
   const runSystem = action => system => system(store, action)
@@ -18,7 +18,7 @@ const buildLoop = ({ systems, store, renderer, ai = null }) => {
 
       const entity = turnQueue.next()
 
-      action = action || ai.getAction(entity, store)
+      action = action || ai(entity, store)
       systems.forEach(runSystem(action))
 
       action = null
