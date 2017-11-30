@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import tiles from './tiles'
-
 import './entities.css'
 
 const toWorld = n => `${n}em`
@@ -16,9 +14,9 @@ const Board = ({ entities, width, height }) => (
     }}
   >
     {
-      entities.map(({ id, type, position, visibility }) => {
+      entities.map(({ id, type, tile, position, visibility }) => {
         const { x, y } = position
-        const { character, layer = 0 } = tiles[type]
+        const { character, layer = 0 } = tile
         const style = {
           transform: `translate(${toWorld(x)}, ${toWorld(y)})`,
           zIndex: layer,

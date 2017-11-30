@@ -1,0 +1,8 @@
+#canvas {
+  margin-left: 50vw;
+  margin-top: 50vh;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 0;
+  left: 0;
+}

@@ -1,7 +1,8 @@
-import buildReactRenderer from './react'
+import renderer from './react'
+import tiles from './tiles'
 
 const buildRenderer = ({ store }) => {
-  const render = buildReactRenderer()
+  const render = renderer()
 
   return () => {
     const bounds = {
@@ -26,6 +27,7 @@ const buildRenderer = ({ store }) => {
         return {
           id: entity,
           type,
+          tile: tiles[type],
           position,
           visibility,
         }

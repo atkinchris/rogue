@@ -11,15 +11,6 @@ body,
   overflow: hidden;
 }
 
-#canvas {
-  margin-left: 50vw;
-  margin-top: 50vh;
-  transform: translate(-50%, -50%);
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
 #controls {
   display: flex;
   flex-direction: column;
@@ -62,11 +53,8 @@ body,
 .board {
   font-family: 'Source Code Pro', monospace;
   font-weight: 300;
-  font-size: 1.3rem;
   position: relative;
-  width: 10em;
-  height: 10em;
-  transform: scale(1.3);
+  transform: scale(1.5);
 }
 
 .entity {
