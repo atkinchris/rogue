@@ -38,11 +38,13 @@ const fieldOfVision = () => (store) => {
   const visionMap = entities.reduce((map, entity) => {
     const pos = store.getComponent(entity, 'position')
     const blocksSight = store.hasComponent(entity, 'blocksSight')
+    const posString = posToString(pos)
+    const existing = map[posString]
 
-    return {
-      ...map,
-      [posToString(pos)]: blocksSight,
-    }
+    // eslint-disable-next-line no-param-reassign
+    map[posString] = existing || blocksSight
+
+    return map
   }, {})
   const visibles = {}
   const addVisibility = (pos, visible) => {

@@ -1,24 +1,19 @@
-import posToString from '../utils/posToString'
-
 import buildReactRenderer from './react'
 
 const buildRenderer = ({ store }) => {
   const render = buildReactRenderer()
 
   return () => {
-    const vision = store.getCache('vision')
-    const fogOfWar = store.getCache('fogOfWar')
     const bounds = {
       width: 0,
       height: 0,
     }
     const entities = store
-      .getEntitiesWith(['visible', 'position'])
-      .map((id) => {
-        const position = store.getComponent(id, 'position')
-        const posString = posToString(position)
-        const type = store.getComponent(id, 'type')
-        let visibility
+      .getEntitiesWith(['visibility', 'position', 'type'])
+      .map((entity) => {
+        const position = store.getComponent(entity, 'position')
+        const visibility = store.getComponent(entity, 'visibility')
+        const type = store.getComponent(entity, 'type')
 
         if (position.x > bounds.width) {
           bounds.width = position.x
@@ -28,16 +23,8 @@ const buildRenderer = ({ store }) => {
           bounds.height = position.y
         }
 
-        if (vision[posString]) {
-          visibility = 'visible'
-        } else if (fogOfWar[posString] && store.hasComponent(id, 'visibleInFog')) {
-          visibility = 'visibleInFog'
-        } else {
-          visibility = 'hidden'
-        }
-
         return {
-          id,
+          id: entity,
           type,
           position,
           visibility,

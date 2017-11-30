@@ -1,5 +1,6 @@
 import applyAction from './applyAction'
 import applyMovement from './applyMovement'
+import applyVisibility from './applyVisibility'
 import attack from './attack'
 import bumpAttack from './bumpAttack'
 import collision from './collision'
@@ -18,4 +19,5 @@ export default [
   damage(),
   death(),
   fieldOfVision(),
+  applyVisibility(),
 ]
