@@ -24,8 +24,8 @@ describe('calculatePath', () => {
 
     expect(path).toEqual([
       { x: 2, y: 3 },
-      { x: 3, y: 3 },
-      { x: 3, y: 2 },
+      { x: 2, y: 2 },
+      { x: 2, y: 1 },
       { x: 3, y: 1 },
     ])
   })
@@ -45,5 +45,33 @@ describe('calculatePath', () => {
     const path = calculatePath(start, end, callback)
 
     expect(path).toEqual([])
+  })
+
+  it('continues along a path', () => {
+    const end = { x: 4, y: 2 }
+    const grid = [
+      [1, 1, 1, 1, 1, 1],
+      [1, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 1],
+      [1, 1, 1, 1, 1, 1],
+    ]
+    const callback = buildCallback(grid)
+
+    expect(calculatePath({ x: 2, y: 3 }, end, callback)).toEqual([
+      { x: 3, y: 3 },
+      { x: 4, y: 3 },
+      { x: 4, y: 2 },
+    ])
+
+    expect(calculatePath({ x: 3, y: 3 }, end, callback)).toEqual([
+      { x: 4, y: 3 },
+      { x: 4, y: 2 },
+    ])
+
+    expect(calculatePath({ x: 4, y: 3 }, end, callback)).toEqual([
+      { x: 4, y: 2 },
+    ])
   })
 })

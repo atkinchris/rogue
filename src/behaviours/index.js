@@ -12,7 +12,10 @@ const behaviourEngine = ({ player }) => (entity, store) => {
     const callback = pos => ({
       ...pos,
       cost: 1,
-      blocked: !!collisionMap[posToString(pos)],
+      blocked: (
+        !(pos.x === playerPosition.x && pos.y === playerPosition.y) &&
+        collisionMap[posToString(pos)]
+      ),
     })
     const path = calculatePath(entityPosition, playerPosition, callback)
 

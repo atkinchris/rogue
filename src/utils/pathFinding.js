@@ -1,11 +1,22 @@
 /* eslint-disable no-loop-func */
-import Heap from 'heap'
-
+import Heap from './Heap'
 import PositionSet from './PositionSet'
 import calculateNeighbours from './neighbours'
 
+const MAX_ITERATION = 200
+
 const manhattan = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
 const trimNode = ({ x, y }) => ({ x, y })
+const isSame = (a, b) => a.x === b.x && a.y === b.y
+const pathTo = (node) => {
+  let current = node
+  const path = []
+  while (current.parent) {
+    path.push(trimNode(current))
+    current = current.parent
+  }
+  return path.reverse()
+}
 
 const calculatePath = (start, end, callback, heuristic = manhattan) => {
   const heap = new Heap(node => node.f)
@@ -13,17 +24,13 @@ const calculatePath = (start, end, callback, heuristic = manhattan) => {
 
   heap.push(start)
 
-  while (heap.size() > 0) {
+  let iteration = 0
+  while (heap.size() > 0 && iteration < MAX_ITERATION) {
+    iteration += 1
     const currentNode = heap.pop()
 
-    if (currentNode.x === end.x && currentNode.y === end.y) {
-      let node = currentNode
-      const path = []
-      while (node.parent) {
-        path.push(trimNode(node))
-        node = node.parent
-      }
-      return path.reverse()
+    if (isSame(currentNode, end)) {
+      return pathTo(currentNode)
     }
 
     const neighbours = calculateNeighbours(currentNode, callback)
@@ -48,7 +55,7 @@ const calculatePath = (start, end, callback, heuristic = manhattan) => {
         if (!beenVisited) {
           heap.push(neighbour)
         } else {
-          heap.updateItem(neighbour)
+          heap.rescoreElement(neighbour)
         }
       }
     })
