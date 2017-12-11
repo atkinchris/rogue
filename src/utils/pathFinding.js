@@ -35,10 +35,10 @@ const calculatePath = (start, end, callback, heuristic = manhattan) => {
         return
       }
 
-      const gScore = currentNode.g + neighbour.cost
+      const gScore = (currentNode.g || 0) + neighbour.cost
       const beenVisited = neighbour.visited
 
-      if (!beenVisited || gScore < neighbour.g) {
+      if (!beenVisited || gScore < (neighbour.g || 0)) {
         neighbour.visited = true
         neighbour.parent = currentNode
         neighbour.h = neighbour.h || heuristic(neighbour, end)

@@ -1,4 +1,6 @@
 import relativeDirection from '../utils/relativeDirection'
+import posToString from '../utils/posToString'
+import calculatePath from '../utils/pathFinding'
 
 const behaviourEngine = ({ player }) => (entity, store) => {
   const visibility = store.getComponent(entity, 'visibility')
@@ -6,14 +8,26 @@ const behaviourEngine = ({ player }) => (entity, store) => {
   if (visibility === 'visible') {
     const entityPosition = store.getComponent(entity, 'position')
     const playerPosition = store.getComponent(player, 'position')
-    const direction = relativeDirection(entityPosition, playerPosition)
+    const collisionMap = store.getCache('collisions')
+    const callback = pos => ({
+      ...pos,
+      cost: 1,
+      blocked: !!collisionMap[posToString(pos)],
+    })
+    const path = calculatePath(entityPosition, playerPosition, callback)
 
-    return {
-      type: 'move',
-      direction,
-      entity,
+    if (path.length > 0) {
+      const direction = relativeDirection(entityPosition, path[0])
+
+      return {
+        type: 'move',
+        direction,
+        entity,
+      }
     }
   }
+
+  return null
 }
 
 export default behaviourEngine
