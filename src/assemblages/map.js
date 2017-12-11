@@ -4,6 +4,7 @@ import {
   createWall,
   createDoor,
   createFloor,
+  createUndergrowth,
 } from './'
 
 const MAP = [
@@ -16,9 +17,9 @@ const MAP = [
   ' ###+########+###',
   '##......#####.#',
   '#...@...##k...#',
-  '#.......#####.#',
-  '##....k.#####.#',
-  ' #............#',
+  '#.""""..#####.#',
+  '##""""""#####.#',
+  ' #"""""".k....#',
   ' ##############',
 ]
 
@@ -27,24 +28,29 @@ const buildMap = ({ store }) => {
 
   MAP.forEach((row, y) => {
     row.split('').forEach((cell, x) => {
+      const position = { x, y }
+
       switch (cell) {
         case '@': {
-          player = createPlayer(store, { x, y })
-          createFloor(store, { x, y })
+          player = createPlayer(store, position)
+          createFloor(store, position)
           break
         }
+        case '"':
+          createUndergrowth(store, position)
+          break
         case '#':
-          createWall(store, { x, y })
+          createWall(store, position)
           break
         case '+':
-          createDoor(store, { x, y })
+          createDoor(store, position)
           break
         case '.':
-          createFloor(store, { x, y })
+          createFloor(store, position)
           break
         case 'k':
-          createMonster(store, { x, y })
-          createFloor(store, { x, y })
+          createMonster(store, position)
+          createFloor(store, position)
           break
         default:
           break

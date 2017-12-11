@@ -15,6 +15,9 @@ const Board = ({ entities, width, height }) => (
   >
     {
       entities.map(({ id, type, tile, position, visibility }) => {
+        if (!tile) {
+          throw Error(`Undefined tile - is "${type}" in the tile map?`)
+        }
         const { x, y } = position
         const { character, layer = 0 } = tile
         const style = {

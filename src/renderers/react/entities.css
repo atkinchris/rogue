@@ -37,3 +37,7 @@
 .entity.e-monster {
   color: #E97F02;
 }
+
+.entity.e-undergrowth {
+  color: green;
+}

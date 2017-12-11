@@ -62,10 +62,23 @@ const createFloor = (store, position) => {
   return entity
 }
 
+const createUndergrowth = (store, position) => {
+  const entity = store.createEntity()
+
+  store.addComponent(entity, 'type', 'undergrowth')
+  store.addComponent(entity, 'position', position)
+  store.addComponent(entity, 'visible')
+  store.addComponent(entity, 'visibleInFog')
+  store.addComponent(entity, 'blocksSight')
+
+  return entity
+}
+
 export {
   createPlayer,
   createMonster,
   createWall,
   createDoor,
   createFloor,
+  createUndergrowth,
 }
