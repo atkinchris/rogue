@@ -12,10 +12,10 @@ describe('neighbours', () => {
 
   it('returns an array of neighbour cells', () => {
     const callback = buildCallback()
-    const position = { x: 2, y: 2 }
+    const position = { x: 1, y: 1 }
     const neighbours = buildNeighbours(position, callback)
 
-    expect(neighbours).toEqual([0, 0, 0, 0])
+    expect(neighbours).toEqual([1, 0, 0, 1])
   })
 
   it('calls the callback to get the cells', () => {
