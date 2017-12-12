@@ -1,5 +1,5 @@
 import relativeDirection from '../utils/relativeDirection'
-import posToString from '../utils/posToString'
+import { posToString } from '../utils/positions'
 import calculatePath from '../utils/pathFinding'
 
 const behaviourEngine = ({ player }) => (entity, store) => {

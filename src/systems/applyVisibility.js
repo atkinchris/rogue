@@ -1,4 +1,4 @@
-import posToString from '../utils/posToString'
+import { posToString } from '../utils/positions'
 
 const applyVision = () => (store) => {
   const vision = store.getCache('vision')

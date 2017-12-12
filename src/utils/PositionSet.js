@@ -1,4 +1,4 @@
-import posToString from './posToString'
+import { posToString } from './positions'
 
 class PositionSet {
   constructor() {
