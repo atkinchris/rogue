@@ -7,6 +7,7 @@ import collision from './collision'
 import damage from './damage'
 import death from './death'
 import evaluateMovement from './evaluateMovement'
+import expandFog from './expandFog'
 import fieldOfVision from './fieldOfVision'
 
 export default (...args) => [
@@ -19,5 +20,6 @@ export default (...args) => [
   damage(...args),
   death(...args),
   fieldOfVision(...args),
+  expandFog(...args),
   applyVisibility(...args),
 ]
