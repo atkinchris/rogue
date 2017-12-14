@@ -1,3 +1,6 @@
+const WALL = '#'
+const FLOOR = '.'
+
 const buildGrid = ({ rooms, bounds, corridors }) => {
   const grid = []
 
@@ -15,15 +18,15 @@ const buildGrid = ({ rooms, bounds, corridors }) => {
     const y2 = Math.max(aY, bY)
 
     for (let x = x1; x < x2; x += 1) {
-      grid[y2 - 1][x] = 'X'
-      grid[y2][x] = '.'
-      grid[y2 + 1][x] = 'X'
+      grid[y2 - 1][x] = WALL
+      grid[y2][x] = FLOOR
+      grid[y2 + 1][x] = WALL
     }
 
     for (let y = y1; y < y2; y += 1) {
-      grid[y][x2 - 1] = 'X'
-      grid[y][x2] = '.'
-      grid[y][x2 + 1] = 'X'
+      grid[y][x2 - 1] = WALL
+      grid[y][x2] = FLOOR
+      grid[y][x2 + 1] = WALL
     }
   })
 
@@ -35,24 +38,31 @@ const buildGrid = ({ rooms, bounds, corridors }) => {
         if (!grid[y + rY]) {
           grid[y + rY] = [...Array(bounds.width)].fill(' ')
         }
-        grid[y + rY][x + rX] = '.'
+        grid[y + rY][x + rX] = FLOOR
       }
     }
 
     for (let rX = 0; rX <= width; rX += 1) {
-      grid[y][x + rX] = 'X'
-      grid[y + height][x + rX] = 'X'
+      grid[y][x + rX] = WALL
+      grid[y + height][x + rX] = WALL
     }
 
     for (let rY = 0; rY <= height; rY += 1) {
-      grid[y + rY][x] = 'X'
-      grid[y + rY][x + width] = 'X'
+      grid[y + rY][x] = WALL
+      grid[y + rY][x + width] = WALL
     }
 
-    grid[midY][midX] = String.fromCharCode(97 + index).toUpperCase()
+    grid[midY][midX] = 'k'
   })
 
-  return grid.map(row => row.join('')).join('\n')
+  const player = {
+    x: rooms[0].midX,
+    y: rooms[0].midY,
+  }
+
+  grid[player.y][player.x] = '@'
+
+  return grid.map(row => row.join(''))
 }
 
 export default buildGrid

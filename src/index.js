@@ -7,11 +7,13 @@ import buildMap from './assemblages/map'
 import buildOnScreenControls from './utils/onScreenControls'
 import buildRenderer from './renderers'
 import behaviourEngine from './behaviours'
+import generateMap from './utils/mapGen'
 
 import './index.css'
 
 const store = new Store({ debug: false, middleware })
-const player = buildMap({ store })
+const map = generateMap()
+const player = buildMap({ store, map })
 const ai = behaviourEngine({ player })
 const renderer = buildRenderer({ store })
 const systems = buildSystems({ player })

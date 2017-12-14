@@ -26,10 +26,10 @@ const MAP = [
   ' ###############',
 ]
 
-const buildMap = ({ store }) => {
+const buildMap = ({ store, map = MAP }) => {
   let player
 
-  MAP.forEach((row, y) => {
+  map.forEach((row, y) => {
     row.split('').forEach((cell, x) => {
       const position = { x, y }
 
