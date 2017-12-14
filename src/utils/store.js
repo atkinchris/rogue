@@ -1,10 +1,11 @@
 import { v4 as uuid } from 'uuid'
 
 import { EnergyQueue } from './Queue'
+import arraysIntersect from './arraysIntersect'
 
 class Store {
   constructor({ debug, middleware = {} } = {}) {
-    this.entities = {}
+    this.entities = new Set()
     this.components = {}
     this.caches = {}
     this.turnQueue = new EnergyQueue()
@@ -17,13 +18,13 @@ class Store {
 
   createEntity() {
     const id = uuid()
-    this.entities[id] = true
+    this.entities.add(id)
 
     return id
   }
 
   removeEntity(entity) {
-    this.entities[entity] = null
+    this.entities.delete(entity)
 
     Object.keys(this.components).forEach(component => this.removeComponent(entity, component))
   }
@@ -36,37 +37,39 @@ class Store {
     return this.caches[key]
   }
 
-  addComponent(entity, component, state = true) {
-    if (!this.components[component]) {
-      this.components[component] = {}
-    }
+  addComponent(entity, componentName, state = true) {
+    const component = this.components[componentName] || new Map()
 
-    const previous = this.components[component][entity]
+    const previous = component.get(entity)
     const next = state
 
-    this.middleware.onAdd.forEach(m => m(this, component, entity, { previous, next }))
-    this.components[component][entity] = next
+    this.middleware.onAdd.forEach(m => m(this, componentName, entity, { previous, next }))
+    component.set(entity, next)
+
+    this.components[componentName] = component
   }
 
-  removeComponent(entity, component) {
-    if (!this.components[component]) {
-      this.components[component] = {}
-    }
+  removeComponent(entity, componentName) {
+    const component = this.components[componentName] || new Map()
 
-    this.middleware.onRemove.forEach(m => m(this, component, entity))
-    delete this.components[component][entity]
+    this.middleware.onRemove.forEach(m => m(this, componentName, entity))
+    component.delete(entity)
+
+    this.components[componentName] = component
   }
 
-  getEntitiesWith(components) {
-    const allEntities = Object.keys(this.entities)
+  getEntitiesWith(componentNames) {
+    const entities = componentNames.map((name) => {
+      const component = this.components[name]
 
-    return allEntities.filter(entity => (
-      components.every(component => this.getComponent(entity, component))
-    ))
+      return component ? [...component.keys()] : []
+    })
+
+    return arraysIntersect(entities)
   }
 
   getComponent(entity, component) {
-    return this.components[component] && this.components[component][entity]
+    return this.components[component] && this.components[component].get(entity)
   }
 
   hasComponent(entity, component) {
