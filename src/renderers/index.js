@@ -10,7 +10,7 @@ const buildRenderer = ({ store }) => {
       height: 0,
     }
     const entities = store
-      .getEntitiesWith(['visibility', 'position', 'type'])
+      .getEntitiesWith(['visibility', 'position', 'type'], true)
       .map((entity) => {
         const position = store.getComponent(entity, 'position')
         const visibility = store.getComponent(entity, 'visibility')

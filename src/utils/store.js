@@ -61,14 +61,15 @@ class Store {
     this.components[componentName] = component
   }
 
-  getEntitiesWith(componentNames) {
-    return [...this.entities].reduce((out, [entity, components]) => {
-      if (componentNames.every(name => components[name])) {
-        out.push(entity)
-      }
-
-      return out
-    }, [])
+  getEntitiesWith(componentNames, includeStatic = false) {
+    return [...this.entities]
+      .filter(([, components]) => !components.static || includeStatic)
+      .reduce((out, [entity, components]) => {
+        if (componentNames.every(name => components[name])) {
+          out.push(entity)
+        }
+        return out
+      }, [])
   }
 
   getComponent(entity, component) {

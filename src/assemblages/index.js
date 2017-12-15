@@ -35,6 +35,7 @@ const createWall = (store, position) => {
   store.addComponent(entity, 'collides')
   store.addComponent(entity, 'blocksSight')
   store.addComponent(entity, 'visibleInFog')
+  store.addComponent(entity, 'static')
 
   return entity
 }
@@ -58,6 +59,7 @@ const createFloor = (store, position) => {
   store.addComponent(entity, 'position', position)
   store.addComponent(entity, 'visible')
   store.addComponent(entity, 'visibleInFog')
+  store.addComponent(entity, 'static')
 
   return entity
 }
@@ -70,6 +72,7 @@ const createUndergrowth = (store, position) => {
   store.addComponent(entity, 'visible')
   store.addComponent(entity, 'visibleInFog')
   store.addComponent(entity, 'blocksSight')
+  store.addComponent(entity, 'static')
 
   return entity
 }

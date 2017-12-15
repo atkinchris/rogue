@@ -30,7 +30,7 @@ const transformOctant = ({ x, y }, row, col, octant) => {
 
 const fieldOfVision = () => (store) => {
   const fogOfWar = store.getCache('fogOfWar') || {}
-  const entities = store.getEntitiesWith(['position'])
+  const entities = store.getEntitiesWith(['position'], true)
   const player = store.getEntitiesWith(['playerControlled'])[0]
   const playerPosition = store.getComponent(player, 'position')
   const maxDistance = 20
