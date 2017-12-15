@@ -28,7 +28,9 @@ const transformOctant = ({ x, y }, row, col, octant) => {
   }
 }
 
-const fieldOfVision = () => (store) => {
+const fieldOfVision = ({ player: pId }) => (store, action) => {
+  if (!(action && action.entity === pId)) return
+
   const fogOfWar = store.getCache('fogOfWar') || {}
   const entities = store.getEntitiesWith(['position'], true)
   const player = store.getEntitiesWith(['playerControlled'])[0]

@@ -9,15 +9,15 @@ import death from './death'
 import evaluateMovement from './evaluateMovement'
 import fieldOfVision from './fieldOfVision'
 
-export default [
-  applyAction(),
-  evaluateMovement(),
-  bumpAttack(),
-  collision(),
-  applyMovement(),
-  attack(),
-  damage(),
-  death(),
-  fieldOfVision(),
-  applyVisibility(),
+export default (...args) => [
+  applyAction(...args),
+  evaluateMovement(...args),
+  bumpAttack(...args),
+  collision(...args),
+  applyMovement(...args),
+  attack(...args),
+  damage(...args),
+  death(...args),
+  fieldOfVision(...args),
+  applyVisibility(...args),
 ]
