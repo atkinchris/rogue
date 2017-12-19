@@ -12,6 +12,16 @@ describe('store', () => {
     ])
   })
 
+  it('deletes an entity', () => {
+    const store = new Store()
+    const entity = store.createEntity()
+
+    store.addComponent(entity, 'hasCake', true)
+    store.removeEntity(entity)
+
+    expect(store.getEntitiesWith(['hasCake'])).toEqual([])
+  })
+
   it('removes a component from an entity', () => {
     const store = new Store()
     const entity = store.createEntity()

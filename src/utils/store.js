@@ -35,11 +35,11 @@ class Store {
   }
 
   removeEntity(entity) {
+    Object.keys(this.components).forEach(component => this.removeComponent(entity, component))
+
     this.entities.delete(entity)
 
     this.cacheEntities()
-
-    Object.keys(this.components).forEach(component => this.removeComponent(entity, component))
   }
 
   setCache(key, cache) {
@@ -71,6 +71,10 @@ class Store {
   removeComponent(entity, componentName) {
     const component = this.components[componentName] || new Map()
     const existingComponents = this.entities.get(entity)
+
+    if (!existingComponents) {
+      return
+    }
 
     this.middleware.onRemove.forEach(m => m(this, componentName, entity))
     component.delete(entity)
