@@ -27,7 +27,7 @@ const createMonster = (store, position) => {
 }
 
 const createWall = (store, position) => {
-  const entity = store.createEntity()
+  const entity = store.createEntity(true)
 
   store.addComponent(entity, 'type', 'wall')
   store.addComponent(entity, 'position', position)
@@ -41,7 +41,7 @@ const createWall = (store, position) => {
 }
 
 const createDoor = (store, position) => {
-  const entity = store.createEntity()
+  const entity = store.createEntity(true)
 
   store.addComponent(entity, 'type', 'door')
   store.addComponent(entity, 'position', position)
@@ -53,7 +53,7 @@ const createDoor = (store, position) => {
 }
 
 const createFloor = (store, position) => {
-  const entity = store.createEntity()
+  const entity = store.createEntity(true)
 
   store.addComponent(entity, 'type', 'floor')
   store.addComponent(entity, 'position', position)
@@ -65,7 +65,7 @@ const createFloor = (store, position) => {
 }
 
 const createUndergrowth = (store, position) => {
-  const entity = store.createEntity()
+  const entity = store.createEntity(true)
 
   store.addComponent(entity, 'type', 'undergrowth')
   store.addComponent(entity, 'position', position)
