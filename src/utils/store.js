@@ -1,6 +1,8 @@
 import { v4 as uuid } from 'uuid'
 
 import { EnergyQueue } from './Queue'
+import { hasFlag, hasFlags, arrayToMask, addFlag, removeFlag } from '../utils/bitmask'
+import componentFlags from '../components'
 
 const DEFAULT_MIDDLEWARE = { onAdd: [], onRemove: [] }
 
@@ -20,14 +22,14 @@ class Store {
   }
 
   cacheEntities() {
-    const staticFilter = bool => ([, { isStatic }]) => isStatic === bool
+    const staticFilter = bool => ([, mask]) => hasFlag(mask, componentFlags.isStatic) === bool
     this.entitiesDynamic = new Map([...this.entities].filter(staticFilter(false)))
     this.entitiesStatic = new Map([...this.entities].filter(staticFilter(true)))
   }
 
   createEntity(isStatic = false) {
     const id = uuid()
-    this.entities.set(id, { isStatic })
+    this.entities.set(id, isStatic ? componentFlags.isStatic : 0)
 
     this.cacheEntities()
 
@@ -54,7 +56,7 @@ class Store {
     const component = this.components[componentName] || new Map()
     const existingComponents = this.entities.get(entity)
 
-    if (!existingComponents) {
+    if (existingComponents === undefined) {
       throw Error(`Attempted to add component to entity that does not exist (${entity})`)
     }
 
@@ -63,32 +65,40 @@ class Store {
 
     this.middleware.onAdd.forEach(m => m(this, componentName, entity, { previous, next }))
     component.set(entity, next)
-    existingComponents[componentName] = true
+    this.entities.set(entity, addFlag(existingComponents, componentFlags[componentName]))
 
     this.components[componentName] = component
+    // this.cacheEntities()
   }
 
   removeComponent(entity, componentName) {
     const component = this.components[componentName] || new Map()
     const existingComponents = this.entities.get(entity)
 
-    if (!existingComponents) {
+    if (existingComponents === undefined) {
       return
     }
 
     this.middleware.onRemove.forEach(m => m(this, componentName, entity))
     component.delete(entity)
-    delete existingComponents[componentName]
+    this.entities.set(entity, removeFlag(existingComponents, componentFlags[componentName]))
 
     this.components[componentName] = component
+    // this.cacheEntities()
   }
 
-  getEntitiesWith(componentNames, includeStatic = false) {
-    const entities = includeStatic ? this.entities : this.entitiesDynamic
-    return [...entities].reduce((out, [entity, components]) => {
-      if (componentNames.every(name => components[name])) {
-        out.push(entity)
+  // getEntitiesWith(componentNames, includeStatic = false) {
+  getEntitiesWith(componentNames) {
+    // const entities = includeStatic ? this.entities : this.entitiesDynamic
+    const expectedMask = arrayToMask(componentNames, componentFlags)
+
+    return [...this.entities].reduce((out, entity) => {
+      const [id, mask] = entity
+
+      if (hasFlags(mask, expectedMask)) {
+        out.push(id)
       }
+
       return out
     }, [])
   }
