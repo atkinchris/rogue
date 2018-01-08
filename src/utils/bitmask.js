@@ -16,7 +16,7 @@ const removeFlag = (mask, flag) => mask & ~flag
 
 const hasFlag = (mask, flag) => !!(mask & flag)
 
-const hasFlags = (mask, flagsMask) => (mask | flagsMask) === mask
+const hasFlags = (mask, flagsMask) => (mask | flagsMask) === parseInt(mask, 10)
 
 const maskToArray = (mask, flags) => Object.keys(flags).reduce((out, flag) => {
   const flagMask = flags[flag]

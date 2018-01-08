@@ -1,16 +1,15 @@
 import { v4 as uuid } from 'uuid'
 
 import { EnergyQueue } from './Queue'
-import { hasFlag, hasFlags, arrayToMask, addFlag, removeFlag } from '../utils/bitmask'
+import { arrayToMask, addFlag, removeFlag, hasFlags } from '../utils/bitmask'
 import componentFlags from '../components'
 
 const DEFAULT_MIDDLEWARE = { onAdd: [], onRemove: [] }
 
 class Store {
   constructor({ debug, middleware = DEFAULT_MIDDLEWARE } = {}) {
-    this.entities = new Map()
-    this.entitiesDynamic = new Map()
-    this.entitiesStatic = new Map()
+    this.entities = {}
+    this.masks = {}
     this.components = {}
     this.caches = {}
     this.turnQueue = new EnergyQueue()
@@ -21,27 +20,36 @@ class Store {
     }
   }
 
-  cacheEntities() {
-    const staticFilter = bool => ([, mask]) => hasFlag(mask, componentFlags.isStatic) === bool
-    this.entitiesDynamic = new Map([...this.entities].filter(staticFilter(false)))
-    this.entitiesStatic = new Map([...this.entities].filter(staticFilter(true)))
+  updateMask(entity, oldComponents, newComponents) {
+    if (oldComponents === newComponents) {
+      return
+    }
+
+    if (!this.masks[oldComponents]) {
+      this.masks[oldComponents] = {}
+    }
+
+    if (!this.masks[newComponents]) {
+      this.masks[newComponents] = {}
+    }
+
+    delete this.masks[oldComponents][entity]
+    this.masks[newComponents][entity] = true
+    this.entities[entity] = newComponents
   }
 
-  createEntity(isStatic = false) {
-    const id = uuid()
-    this.entities.set(id, isStatic ? componentFlags.isStatic : 0)
+  createEntity() {
+    const entity = uuid()
 
-    this.cacheEntities()
+    this.entities[entity] = 0
 
-    return id
+    return entity
   }
 
   removeEntity(entity) {
     Object.keys(this.components).forEach(component => this.removeComponent(entity, component))
 
-    this.entities.delete(entity)
-
-    this.cacheEntities()
+    delete this.entities[entity]
   }
 
   setCache(key, cache) {
@@ -54,7 +62,7 @@ class Store {
 
   addComponent(entity, componentName, state = true) {
     const component = this.components[componentName] || new Map()
-    const existingComponents = this.entities.get(entity)
+    const existingComponents = this.entities[entity]
 
     if (existingComponents === undefined) {
       throw Error(`Attempted to add component to entity that does not exist (${entity})`)
@@ -65,15 +73,16 @@ class Store {
 
     this.middleware.onAdd.forEach(m => m(this, componentName, entity, { previous, next }))
     component.set(entity, next)
-    this.entities.set(entity, addFlag(existingComponents, componentFlags[componentName]))
+
+    const newComponents = addFlag(existingComponents, componentFlags[componentName])
+    this.updateMask(entity, existingComponents, newComponents)
 
     this.components[componentName] = component
-    // this.cacheEntities()
   }
 
   removeComponent(entity, componentName) {
     const component = this.components[componentName] || new Map()
-    const existingComponents = this.entities.get(entity)
+    const existingComponents = this.entities[entity]
 
     if (existingComponents === undefined) {
       return
@@ -81,22 +90,19 @@ class Store {
 
     this.middleware.onRemove.forEach(m => m(this, componentName, entity))
     component.delete(entity)
-    this.entities.set(entity, removeFlag(existingComponents, componentFlags[componentName]))
+
+    const newComponents = removeFlag(existingComponents, componentFlags[componentName])
+    this.updateMask(entity, existingComponents, newComponents)
 
     this.components[componentName] = component
-    // this.cacheEntities()
   }
 
-  // getEntitiesWith(componentNames, includeStatic = false) {
   getEntitiesWith(componentNames) {
-    // const entities = includeStatic ? this.entities : this.entitiesDynamic
     const expectedMask = arrayToMask(componentNames, componentFlags)
 
-    return [...this.entities].reduce((out, entity) => {
-      const [id, mask] = entity
-
+    return Object.keys(this.masks).reduce((out, mask) => {
       if (hasFlags(mask, expectedMask)) {
-        out.push(id)
+        return out.concat(Object.keys(this.masks[mask]))
       }
 
       return out

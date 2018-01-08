@@ -17,6 +17,8 @@ const renderer = buildRenderer({ store })
 const systems = buildSystems({ player })
 const runLoop = buildLoop({ systems, store, renderer, ai })
 
+window.playerId = player
+
 runLoop({ type: 'initial', entity: player })
 
 createInputHandler(direction => runLoop({ type: 'move', direction, entity: player }))
