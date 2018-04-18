@@ -1,7 +1,7 @@
 import Store from '../store'
 
 describe('store', () => {
-  it('adds a component to an entity', () => {
+  xit('adds a component to an entity', () => {
     const store = new Store()
     const entity = store.createEntity()
 

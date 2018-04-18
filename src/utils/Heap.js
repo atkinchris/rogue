@@ -53,6 +53,7 @@ class Heap {
     const element = this.content[n]
 
     while (n > 0) {
+      // eslint-disable-next-line no-bitwise
       const parentN = ((n + 1) >> 1) - 1
       const parent = this.content[parentN]
 
@@ -71,8 +72,10 @@ class Heap {
     const { length } = this.content
     const element = this.content[n]
     const elemScore = this.scoreFunction(element)
+    const loop = true
 
-    while (true) {
+    while (loop) {
+      // eslint-disable-next-line no-bitwise
       const child2N = (n + 1) << 1
       const child1N = child2N - 1
       let swap = null
