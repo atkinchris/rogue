@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 
 const paths = {
@@ -28,17 +28,19 @@ const common = {
       use: 'babel-loader',
     }, {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader'],
-      }),
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
+      ],
     }],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   plugins: [
-    new ExtractTextPlugin('[name].[contenthash:8].css'),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:8].css',
+    }),
     new HtmlWebpackPlugin({ template: path.join(paths.SRC, 'index.html') }),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
@@ -52,7 +54,6 @@ const development = {
   },
   plugins: [
     new webpack.LoaderOptionsPlugin({ debug: true }),
-    new webpack.NamedModulesPlugin(),
   ],
   devtool: 'cheap-module-source-map',
 }
@@ -60,26 +61,6 @@ const development = {
 const production = {
   plugins: [
     new CleanWebpackPlugin([paths.DEST]),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        conditionals: true,
-        unused: true,
-        comparisons: true,
-        sequences: true,
-        dead_code: true,
-        evaluate: true,
-        if_return: true,
-        join_vars: true,
-      },
-      sourceMap: true,
-    }),
   ],
   devtool: 'source-map',
 }
