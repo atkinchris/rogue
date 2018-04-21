@@ -4,8 +4,8 @@ class EdgeBuilder {
     this.currentEdge = []
   }
 
-  addPoint(x, y) {
-    this.currentEdge.push({ x, y })
+  addPoint(x, y, region) {
+    this.currentEdge.push({ x, y, region })
   }
 
   endEdge() {
@@ -14,9 +14,9 @@ class EdgeBuilder {
     const direction = this.currentEdge[0].x === this.currentEdge[this.currentEdge.length - 1].x
       ? 'vertical'
       : 'horizontal'
-    const { length, 0: { x, y } } = this.currentEdge
+    const { length, 0: { x, y, region } } = this.currentEdge
 
-    this.edges.push({ x, y, length, direction })
+    this.edges.push({ x, y, length, direction, region })
     this.currentEdge = []
   }
 
@@ -26,7 +26,16 @@ class EdgeBuilder {
   }
 
   getEdgeHashes() {
-    return this.getEdges().map(EdgeBuilder.toHash)
+    const output = {}
+    const edges = this.getEdges()
+
+    for (let i = 0; i < edges.length; i += 1) {
+      const edge = edges[i]
+      const hash = EdgeBuilder.toHash(edge)
+      output[hash] = edge.region
+    }
+
+    return output
   }
 
   static toHash({ x, y, length, direction }) {

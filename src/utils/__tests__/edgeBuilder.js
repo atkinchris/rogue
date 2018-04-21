@@ -71,19 +71,19 @@ describe('EdgeBuilder', () => {
   it('hashes edges', () => {
     const builder = new EdgeBuilder()
 
-    builder.addPoint(0, 0)
+    builder.addPoint(0, 0, 1)
     builder.addPoint(1, 0)
     builder.addPoint(2, 0)
     builder.endEdge()
 
-    builder.addPoint(0, 0)
+    builder.addPoint(0, 0, 1)
     builder.addPoint(0, 1)
     builder.addPoint(0, 2)
     builder.addPoint(0, 3)
 
-    expect(builder.getEdgeHashes()).toEqual([
-      '000000000030',
-      '000000000041',
-    ])
+    expect(builder.getEdgeHashes()).toEqual({
+      '000000000030': 1,
+      '000000000041': 1,
+    })
   })
 })

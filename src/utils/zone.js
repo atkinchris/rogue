@@ -1,3 +1,5 @@
+import EdgeBuilder from './edgeBuilder'
+
 const ZONE_SIZE = 14
 
 class Zone {
@@ -19,11 +21,43 @@ class Zone {
     this.rebuildRegions()
   }
 
-  flood(x, y, region) {
-    const hash = Zone.toHash(x, y)
-    if (hash === null) return
+  getEdges() {
+    const builder = new EdgeBuilder()
+    let lastPoint
 
-    const node = this.positions[hash]
+    const buildEdge = (x, y) => {
+      const a = this.getPosition(x, y)
+      if (!(lastPoint && lastPoint.blocked) && !a.blocked) {
+        builder.addPoint(a.x, a.y, a.region)
+      }
+
+      if (a.blocked) {
+        builder.endEdge()
+      }
+      lastPoint = a
+    }
+
+    lastPoint = null
+    for (let x = 0; x < ZONE_SIZE; x += 1) buildEdge(x, 0)
+    builder.endEdge()
+
+    lastPoint = null
+    for (let x = 0; x < ZONE_SIZE; x += 1) buildEdge(x, ZONE_SIZE - 1)
+    builder.endEdge()
+
+    lastPoint = null
+    for (let y = 0; y < ZONE_SIZE; y += 1) buildEdge(0, y)
+    builder.endEdge()
+
+    lastPoint = null
+    for (let y = 0; y < ZONE_SIZE; y += 1) buildEdge(ZONE_SIZE - 1, y)
+    builder.endEdge()
+
+    return builder.getEdgeHashes()
+  }
+
+  flood(x, y, region) {
+    const node = this.getPosition(x, y)
     if (!node || node.blocked || node.region) return
 
     this.regions[region].push(node)
@@ -36,11 +70,17 @@ class Zone {
   }
 
   setBlocked(x, y, blocked) {
-    const hash = Zone.toHash(x, y)
-    if (hash === null) return
+    const node = this.getPosition(x, y)
+    if (!node) return
 
-    const node = this.positions[hash]
     node.blocked = blocked
+  }
+
+  getPosition(x, y) {
+    const hash = Zone.toHash(x, y)
+    if (hash === null) return null
+
+    return this.positions[hash]
   }
 
   getPositions() {

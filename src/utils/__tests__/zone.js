@@ -55,4 +55,15 @@ describe('Zone', () => {
       2: 98,
     })
   })
+
+  it('identifies continuous edges for the zone', () => {
+    const zone = new Zone()
+
+    expect(zone.getEdges()).toEqual({
+      '000000000140': 1,
+      '000000130140': 1,
+      '000000000141': 1,
+      '001300000141': 1,
+    })
+  })
 })
