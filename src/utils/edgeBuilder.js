@@ -26,13 +26,14 @@ class EdgeBuilder {
   }
 
   getEdgeHashes() {
-    const output = {}
+    const output = []
     const edges = this.getEdges()
 
     for (let i = 0; i < edges.length; i += 1) {
       const edge = edges[i]
       const hash = EdgeBuilder.toHash(edge)
-      output[hash] = edge.region
+
+      output.push({ hash, region: edge.region })
     }
 
     return output

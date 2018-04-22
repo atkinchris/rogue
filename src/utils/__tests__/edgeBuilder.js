@@ -81,9 +81,9 @@ describe('EdgeBuilder', () => {
     builder.addPoint(0, 2)
     builder.addPoint(0, 3)
 
-    expect(builder.getEdgeHashes()).toEqual({
-      '000000000030': 1,
-      '000000000041': 1,
-    })
+    expect(builder.getEdgeHashes()).toEqual([
+      { hash: '000000000030', region: 1 },
+      { hash: '000000000041', region: 1 },
+    ])
   })
 })

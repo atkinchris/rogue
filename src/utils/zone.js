@@ -1,9 +1,9 @@
-import EdgeBuilder from './edgeBuilder'
-
-const ZONE_SIZE = 14
+export const ZONE_SIZE = 14
 
 class Zone {
-  constructor() {
+  constructor(id, world) {
+    this.id = id
+    this.world = world
     this.positions = {}
 
     for (let y = 0; y < ZONE_SIZE; y += 1) {
@@ -19,41 +19,6 @@ class Zone {
 
     this.resetRegions()
     this.rebuildRegions()
-  }
-
-  getEdges() {
-    const builder = new EdgeBuilder()
-    let lastPoint
-
-    const buildEdge = (x, y) => {
-      const a = this.getPosition(x, y)
-      if (!(lastPoint && lastPoint.blocked) && !a.blocked) {
-        builder.addPoint(a.x, a.y, a.region)
-      }
-
-      if (a.blocked) {
-        builder.endEdge()
-      }
-      lastPoint = a
-    }
-
-    lastPoint = null
-    for (let x = 0; x < ZONE_SIZE; x += 1) buildEdge(x, 0)
-    builder.endEdge()
-
-    lastPoint = null
-    for (let x = 0; x < ZONE_SIZE; x += 1) buildEdge(x, ZONE_SIZE - 1)
-    builder.endEdge()
-
-    lastPoint = null
-    for (let y = 0; y < ZONE_SIZE; y += 1) buildEdge(0, y)
-    builder.endEdge()
-
-    lastPoint = null
-    for (let y = 0; y < ZONE_SIZE; y += 1) buildEdge(ZONE_SIZE - 1, y)
-    builder.endEdge()
-
-    return builder.getEdgeHashes()
   }
 
   flood(x, y, region) {
@@ -93,7 +58,7 @@ class Zone {
 
   resetRegions() {
     this.regions = {}
-    this.lastRegion = 0
+    this.lastRegionId = 0
     const positions = this.getPositions()
 
     for (let index = 0; index < positions.length; index += 1) {
@@ -106,8 +71,8 @@ class Zone {
     let next = this.getNextFreePosition()
 
     while (next) {
-      this.lastRegion += 1
-      const region = this.lastRegion
+      this.lastRegionId += 1
+      const region = `${this.id}:${this.lastRegionId}`
       this.regions[region] = []
       this.flood(next.x, next.y, region)
       next = this.getNextFreePosition()
