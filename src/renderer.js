@@ -28,10 +28,10 @@ class Renderer {
     })
   }
 
-  render({ entities }) {
+  render({ components: { position } }) {
     this.world.removeChildren()
 
-    entities.forEach(entity => {
+    position.forEach(entity => {
       const sprite = PIXI.Sprite.fromFrame(`${entity.sprite}.png`)
       sprite.anchor.set(0.5)
       sprite.x = entity.x * TILE_SIZE
