@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import * as PIXI from 'pixi.js'
 
 class Renderer {
@@ -13,6 +14,16 @@ class Renderer {
 
     this.app = app
     this.world = world
+  }
+
+  async load() {
+    return new Promise((resolve, reject) => {
+      try {
+        PIXI.loader.add('assets/spritesheet.json').load(resolve)
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 
   render({ entities }) {
