@@ -6,10 +6,12 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const paths = {
   SRC: path.resolve(__dirname, 'src'),
   DEST: path.resolve(__dirname, 'dist'),
+  ASSETS: path.resolve(__dirname, 'assets'),
 }
 
 const common = {
@@ -41,6 +43,7 @@ const common = {
   plugins: [
     new MiniCssExtractPlugin({ fileName: '[name].[contenthash:8].css' }),
     new HtmlWebpackPlugin({ template: path.join(paths.SRC, 'index.html') }),
+    new CopyWebpackPlugin([paths.ASSETS]),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 }

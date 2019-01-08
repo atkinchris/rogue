@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "pixi.js": "^4.8.5",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -18,7 +19,8 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx",
     "prettier": "prettier --list-different \"src/**/*.{js,jsx}\"",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "sprites": "spritesheet-js -f pixi.js -p assets resources/sprites/**/*.png"
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
@@ -27,6 +29,7 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.2",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.0",
     "eslint": "5.9.0",
     "eslint-config-airbnb": "^17.0.0",
@@ -39,6 +42,7 @@
     "jest": "^22.4.3",
     "mini-css-extract-plugin": "^0.4.1",
     "prettier": "^1.13.7",
+    "spritesheet-js": "^1.2.6",
     "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^2.0.0",
     "webpack": "^4.16.2",
