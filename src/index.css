@@ -29,6 +29,14 @@ body,
   }
 }
 
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
 .control-button {
   max-height: 60px;
   max-width: 60px;
