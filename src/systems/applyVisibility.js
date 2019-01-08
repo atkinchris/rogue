@@ -1,10 +1,10 @@
 import { posToString } from '../utils/positions'
 
-const applyVision = () => (store) => {
+const applyVision = () => store => {
   const vision = store.getCache('vision') || {}
   const fogOfWar = store.getCache('fogOfWar') || {}
 
-  store.getEntitiesWith(['visible', 'position'], true).forEach((entity) => {
+  store.getEntitiesWith(['visible', 'position'], true).forEach(entity => {
     const position = store.getComponent(entity, 'position')
     const posString = posToString(position)
 

@@ -1,11 +1,4 @@
-import {
-  createPlayer,
-  createMonster,
-  createWall,
-  createDoor,
-  createFloor,
-  createUndergrowth,
-} from './'
+import { createPlayer, createMonster, createWall, createDoor, createFloor, createUndergrowth } from '.'
 
 const MAP = [
   ' ###############',

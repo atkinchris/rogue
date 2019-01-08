@@ -1,13 +1,5 @@
 import invert from '../invert'
-import {
-  arrayToHash,
-  arrayToMask,
-  maskToArray,
-  hasFlag,
-  hasFlags,
-  addFlag,
-  removeFlag,
-} from '../bitmask'
+import { arrayToHash, arrayToMask, maskToArray, hasFlag, hasFlags, addFlag, removeFlag } from '../bitmask'
 
 describe('bitmask', () => {
   const flags = {

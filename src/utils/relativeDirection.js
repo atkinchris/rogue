@@ -3,7 +3,7 @@ const relativeDirection = (a, b) => {
     return 'none'
   }
 
-  const angle = ((Math.atan2(a.y - b.y, b.x - a.x) * 180) / Math.PI) + 90
+  const angle = (Math.atan2(a.y - b.y, b.x - a.x) * 180) / Math.PI + 90
 
   if (angle >= 45 && angle < 135) {
     return 'right'

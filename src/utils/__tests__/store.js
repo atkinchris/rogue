@@ -7,9 +7,7 @@ describe('store', () => {
 
     store.addComponent(entity, 'hasCake', true)
 
-    expect(store.getEntitiesWith(['hasCake'])).toEqual([
-      entity,
-    ])
+    expect(store.getEntitiesWith(['hasCake'])).toEqual([entity])
   })
 
   it('deletes an entity', () => {

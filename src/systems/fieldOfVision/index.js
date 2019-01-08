@@ -23,8 +23,8 @@ const transformOctant = ({ x, y }, row, col, octant) => {
   const [xx, xy, yx, yy] = OCTANTS[octant]
 
   return {
-    x: x + (row * xx) + (col * xy),
-    y: y + (row * yx) + (col * yy),
+    x: x + row * xx + col * xy,
+    y: y + row * yx + col * yy,
   }
 }
 

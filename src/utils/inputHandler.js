@@ -1,7 +1,7 @@
 const EVENT = 'keydown'
 
-const createInputHandler = (callback) => {
-  const handler = (event) => {
+const createInputHandler = callback => {
+  const handler = event => {
     if (event && !event.repeat) {
       switch (event.code) {
         case 'KeyW':

@@ -1,7 +1,7 @@
-const receiveDamage = () => (store) => {
+const receiveDamage = () => store => {
   const entities = store.getEntitiesWith(['receiveDamage'])
 
-  entities.forEach((entity) => {
+  entities.forEach(entity => {
     const damage = store.getComponent(entity, 'receiveDamage')
     const { value } = store.getComponent(entity, 'health')
 

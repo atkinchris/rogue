@@ -16,7 +16,8 @@
     "start": "webpack-dev-server",
     "build": "NODE_ENV=production webpack -p",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx",
+    "prettier": "prettier --list-different \"src/**/*.{js,jsx}\"",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {

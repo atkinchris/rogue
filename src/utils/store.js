@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid'
 
 import { EnergyQueue } from './Queue'
-import { arrayToMask, addFlag, removeFlag, hasFlags } from '../utils/bitmask'
+import { arrayToMask, addFlag, removeFlag, hasFlags } from './bitmask'
 import componentFlags from '../components'
 
 const DEFAULT_MIDDLEWARE = { onAdd: [], onRemove: [] }

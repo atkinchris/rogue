@@ -12,9 +12,7 @@ describe('queue', () => {
 
     queue.enqueue('entity-1')
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1'])
   })
 
   it('does not add an item if it already is queued', () => {
@@ -25,11 +23,7 @@ describe('queue', () => {
     queue.enqueue('entity-3')
     queue.enqueue('entity-2')
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-      'entity-2',
-      'entity-3',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1', 'entity-2', 'entity-3'])
   })
 
   it('removes an item from the queue', () => {
@@ -40,10 +34,7 @@ describe('queue', () => {
     queue.enqueue('entity-3')
     queue.dequeue('entity-2')
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-      'entity-3',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1', 'entity-3'])
   })
 
   it('returns "true" if an item is in the queue', () => {
@@ -89,10 +80,6 @@ describe('queue', () => {
 
     expect(queue.peek()).toBe('entity-1')
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-      'entity-2',
-      'entity-3',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1', 'entity-2', 'entity-3'])
   })
 })

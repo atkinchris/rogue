@@ -8,11 +8,11 @@ const renderCanvas = () => {
   const layers = []
 
   return ({ entities, bounds: { width, height } }) => {
-    canvas.width = (width * TILE_SIZE) + TILE_SIZE
-    canvas.height = (height * TILE_SIZE) + TILE_SIZE
+    canvas.width = width * TILE_SIZE + TILE_SIZE
+    canvas.height = height * TILE_SIZE + TILE_SIZE
 
     context.clearRect(0, 0, canvas.width, canvas.height)
-    layers.forEach((layer) => {
+    layers.forEach(layer => {
       layer.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     })
 
@@ -48,7 +48,7 @@ const renderCanvas = () => {
       ctx.restore()
     })
 
-    layers.forEach((layer) => {
+    layers.forEach(layer => {
       context.drawImage(layer, 0, 0)
     })
   }

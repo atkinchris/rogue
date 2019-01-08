@@ -1,7 +1,7 @@
-const evaluateMovement = () => (store) => {
+const evaluateMovement = () => store => {
   const entities = store.getEntitiesWith(['moveIntent', 'position'])
 
-  entities.forEach((entity) => {
+  entities.forEach(entity => {
     const intent = store.getComponent(entity, 'moveIntent')
     const { x, y } = store.getComponent(entity, 'position')
     const result = { x, y }

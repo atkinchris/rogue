@@ -1,5 +1,5 @@
 .entity {
-  color: #FFFFFF;
+  color: #ffffff;
   background: #101010;
 }
 
@@ -26,16 +26,16 @@
 }
 
 .entity.e-floor.visible {
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .entity.e-door.visible {
-  color: #FFFFFF;
+  color: #ffffff;
   background: #666666;
 }
 
 .entity.e-monster {
-  color: #E97F02;
+  color: #e97f02;
 }
 
 .entity.e-undergrowth {

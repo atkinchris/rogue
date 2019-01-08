@@ -3,7 +3,7 @@ const buildLoop = ({ systems, store, renderer, ai }) => {
   const { turnQueue } = store
   const runSystem = action => system => system(store, action)
 
-  return (playerAction) => {
+  return playerAction => {
     if (isRunning) return
 
     isRunning = true

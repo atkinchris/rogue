@@ -1,7 +1,7 @@
-const death = () => (store) => {
+const death = () => store => {
   const entities = store.getEntitiesWith(['health'])
 
-  entities.forEach((entity) => {
+  entities.forEach(entity => {
     const health = store.getComponent(entity, 'health')
 
     if (health && health.value < 0) {

@@ -74,11 +74,4 @@ const createUndergrowth = (store, position) => {
   return entity
 }
 
-export {
-  createPlayer,
-  createMonster,
-  createWall,
-  createDoor,
-  createFloor,
-  createUndergrowth,
-}
+export { createPlayer, createMonster, createWall, createDoor, createFloor, createUndergrowth }

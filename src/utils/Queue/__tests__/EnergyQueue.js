@@ -6,9 +6,7 @@ describe('energyQueue', () => {
 
     queue.add('entity-1', { speed: 1 })
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1'])
   })
 
   it('removes an entity from the queue', () => {
@@ -20,10 +18,7 @@ describe('energyQueue', () => {
 
     queue.remove('entity-2')
 
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-      'entity-3',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1', 'entity-3'])
   })
 
   it('gets the next entity with enough energy', () => {
@@ -51,11 +46,7 @@ describe('energyQueue', () => {
     queue.add('entity-3', { speed: 5 })
 
     expect(queue.peek()).toBe('entity-2')
-    expect(queue.toArray()).toEqual([
-      'entity-1',
-      'entity-2',
-      'entity-3',
-    ])
+    expect(queue.toArray()).toEqual(['entity-1', 'entity-2', 'entity-3'])
     expect(queue.next()).toBe('entity-2')
   })
 })

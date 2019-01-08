@@ -1,10 +1,10 @@
 import { posToString } from '../utils/positions'
 
-const bumpAttack = () => (store) => {
+const bumpAttack = () => store => {
   const entities = store.getEntitiesWith(['moveIntent', 'collides', 'canAttack'])
   const collisionMap = store.getCache('collisions')
 
-  entities.forEach((entity) => {
+  entities.forEach(entity => {
     const destination = store.getComponent(entity, 'moveIntent')
     const collidingEntity = collisionMap[posToString(destination)]
 

@@ -27,7 +27,7 @@ class EnergyQueue extends Queue {
     let iteration = 0
     const { values, speeds, threshold } = this
     let next = null
-    const test = e => (values[e] + (speeds[e] * iteration)) >= threshold
+    const test = e => values[e] + speeds[e] * iteration >= threshold
 
     do {
       iteration += 1

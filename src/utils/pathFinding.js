@@ -8,7 +8,7 @@ const MAX_ITERATION = 200
 const manhattan = (a, b) => Math.abs(a.x - b.x) + Math.abs(a.y - b.y)
 const trimNode = ({ x, y }) => ({ x, y })
 const isSame = (a, b) => a.x === b.x && a.y === b.y
-const pathTo = (node) => {
+const pathTo = node => {
   let current = node
   const path = []
   while (current.parent) {
@@ -35,7 +35,7 @@ const calculatePath = (start, end, callback, heuristic = manhattan) => {
 
     const neighbours = calculateNeighbours(currentNode, callback)
 
-    neighbours.forEach((position) => {
+    neighbours.forEach(position => {
       const neighbour = cache.setOrGetExisting(position)
 
       if (neighbour.closed || neighbour.blocked) {

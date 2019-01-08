@@ -1,13 +1,7 @@
 import buildNeighbours from '../neighbours'
 
 describe('neighbours', () => {
-  const GRID = [
-    [1, 1, 1, 1, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 1, 1, 1, 1],
-  ]
+  const GRID = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1]]
   const buildCallback = (grid = GRID) => jest.fn(({ x, y }) => grid[y] && grid[y][x])
 
   it('returns an array of neighbour cells', () => {
