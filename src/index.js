@@ -11,8 +11,8 @@ const run = async () => {
     entities: [
       {
         sprite: 'player',
-        x: 400,
-        y: 300,
+        x: 13,
+        y: 9,
       },
     ],
   }

@@ -1,6 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import * as PIXI from 'pixi.js'
 
+const TILE_SIZE = 32
+
 class Renderer {
   constructor() {
     const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb })
@@ -32,8 +34,8 @@ class Renderer {
     entities.forEach(entity => {
       const sprite = PIXI.Sprite.fromFrame(`${entity.sprite}.png`)
       sprite.anchor.set(0.5)
-      sprite.x = entity.x
-      sprite.y = entity.y
+      sprite.x = entity.x * TILE_SIZE
+      sprite.y = entity.y * TILE_SIZE
 
       this.world.addChild(sprite)
     })
