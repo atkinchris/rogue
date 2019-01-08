@@ -1,11 +1,8 @@
 import { v4 as uuid } from 'uuid'
-import buildOnScreenControls from './utils/onScreenControls'
 
 import './index.css'
 import Renderer from './renderer'
 import EnergyQueue from './energyQueue'
-
-buildOnScreenControls()
 
 const withEnergy = new Map()
 const position = new Map()
