@@ -4,6 +4,7 @@ import buildOnScreenControls from './utils/onScreenControls'
 
 import './index.css'
 import Renderer from './renderer'
+import deltaTime from './deltaTime'
 
 buildOnScreenControls()
 
@@ -16,18 +17,12 @@ const world = {
     },
   ],
 }
-let oldTime = Date.now()
 const renderer = new Renderer()
+const time = deltaTime()
 
 function animate() {
-  const newTime = Date.now()
-  let deltaTime = newTime - oldTime
-  oldTime = newTime
-  if (deltaTime < 0) deltaTime = 0
-  if (deltaTime > 1000) deltaTime = 1000
-  const deltaFrame = (deltaTime * 60) / 1000
-
-  renderer.render(world, deltaFrame)
+  const delta = time()
+  renderer.render(world, delta)
 
   requestAnimationFrame(animate)
 }
