@@ -6,6 +6,7 @@ import EnergyQueue from './energyQueue'
 
 const withEnergy = new Map()
 const position = new Map()
+const playerControlled = new Map()
 
 const run = async () => {
   const renderer = new Renderer()
@@ -15,18 +16,30 @@ const run = async () => {
     components: {
       position,
       withEnergy,
+      playerControlled,
     },
   }
 
   const energyQueue = new EnergyQueue()
   const id = uuid()
+  let nextEntity
+
+  /* Demo world setup */
   world.components.position.set(id, { sprite: 'player', x: 13, y: 9 })
   world.components.withEnergy.set(id, { speed: 1 })
   world.components.withEnergy.forEach(({ speed }, entity) => energyQueue.add(entity, speed))
+  /* */
 
   const animate = () => {
-    const nextEntity = energyQueue.next()
-    console.log(nextEntity)
+    if (!nextEntity) {
+      nextEntity = energyQueue.next()
+    }
+
+    if (nextEntity) {
+      const isPlayerControlled = world.components.playerControlled.has(nextEntity)
+
+      console.log(nextEntity, isPlayerControlled)
+    }
 
     renderer.render(world)
     requestAnimationFrame(animate)
