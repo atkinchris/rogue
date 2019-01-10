@@ -23,14 +23,23 @@ const run = async () => {
 
   const energyQueue = new EnergyQueue()
   const behaviourEngine = new BehaviourEngine(world)
-  const id = uuid()
   let nextEntity
   let turnWaiting = false
 
   /* Demo world setup */
-  world.components.position.set(id, { sprite: 'player', x: 13, y: 9 })
-  world.components.takesTurns.set(id, { speed: 1, behaviour: 'playerControlled' })
-  world.components.playerControlled.add(id)
+  {
+    const id = uuid()
+    world.components.position.set(id, { sprite: 'player', x: 13, y: 9, layer: 'foreground' })
+    world.components.takesTurns.set(id, { speed: 1, behaviour: 'playerControlled' })
+    world.components.playerControlled.add(id)
+  }
+  world.components.position.set(uuid(), { sprite: 'grass', x: 11, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 12, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 13, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 14, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 15, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 16, y: 9 })
+  world.components.position.set(uuid(), { sprite: 'grass', x: 17, y: 9 })
   world.components.takesTurns.forEach(({ speed }, entity) => energyQueue.add(entity, speed))
   /* */
 

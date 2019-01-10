@@ -11,11 +11,17 @@ class Renderer {
     const container = document.getElementById('container')
     container.appendChild(app.view)
 
-    const world = new PIXI.Container()
-    app.stage.addChild(world)
+    const background = new PIXI.Container()
+    const foreground = new PIXI.Container()
+
+    app.stage.addChild(background)
+    app.stage.addChild(foreground)
 
     this.app = app
-    this.world = world
+    this.layers = {
+      background,
+      foreground,
+    }
   }
 
   async load() {
@@ -29,7 +35,7 @@ class Renderer {
   }
 
   render({ components: { position } }) {
-    this.world.removeChildren()
+    Object.values(this.layers).forEach(layer => layer.removeChildren())
 
     position.forEach(entity => {
       const sprite = PIXI.Sprite.fromFrame(entity.sprite)
@@ -37,7 +43,7 @@ class Renderer {
       sprite.x = entity.x * TILE_SIZE
       sprite.y = entity.y * TILE_SIZE
 
-      this.world.addChild(sprite)
+      this.layers[entity.layer || 'background'].addChild(sprite)
     })
 
     this.app.render()
