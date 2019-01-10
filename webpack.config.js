@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const paths = {
   SRC: path.resolve(__dirname, 'src'),
   DEST: path.resolve(__dirname, 'dist'),
-  ASSETS: path.resolve(__dirname, 'assets'),
+  RESOURCES: path.resolve(__dirname, 'resources'),
 }
 
 const common = {
@@ -43,7 +43,7 @@ const common = {
   plugins: [
     new MiniCssExtractPlugin({ fileName: '[name].[contenthash:8].css' }),
     new HtmlWebpackPlugin({ template: path.join(paths.SRC, 'index.html') }),
-    new CopyWebpackPlugin([paths.ASSETS]),
+    new CopyWebpackPlugin([{ from: paths.RESOURCES, ignore: ['*.psd'] }]),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
 }

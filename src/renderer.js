@@ -21,7 +21,7 @@ class Renderer {
   async load() {
     return new Promise((resolve, reject) => {
       try {
-        PIXI.loader.add('assets/spritesheet.json').load(resolve)
+        PIXI.loader.add('spritesheet.json').load(resolve)
       } catch (err) {
         reject(err)
       }
@@ -32,7 +32,7 @@ class Renderer {
     this.world.removeChildren()
 
     position.forEach(entity => {
-      const sprite = PIXI.Sprite.fromFrame(`${entity.sprite}.png`)
+      const sprite = PIXI.Sprite.fromFrame(entity.sprite)
       sprite.anchor.set(0.5)
       sprite.x = entity.x * TILE_SIZE
       sprite.y = entity.y * TILE_SIZE
