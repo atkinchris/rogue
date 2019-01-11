@@ -4,29 +4,27 @@ import EnergyQueue from './energyQueue'
 import InputHandler from './inputHandler'
 import BehaviourEngine from './behaviours'
 import Component from './component'
+import World from './world'
 import buildMap from './blueprints/map'
 
 const run = async () => {
   const renderer = new Renderer()
   await renderer.load()
 
-  const world = {
-    components: {},
-    resources: {},
-  }
-
+  const world = new World()
   const energyQueue = new EnergyQueue()
   const behaviourEngine = new BehaviourEngine(world)
   let nextEntity
   let turnWaiting = false
 
-  world.components.position = new Component()
-  world.components.takesTurns = new Component()
-  world.components.playerControlled = new Component()
-  world.resources.inputHandler = new InputHandler()
+  world.addResource('inputHandler', new InputHandler())
+  world.addComponent('position', new Component())
+  world.addComponent('playerControlled', new Component())
 
-  world.components.takesTurns.on('added', (entity, { speed }) => energyQueue.add(entity, speed))
-  world.components.takesTurns.on('removed', entity => energyQueue.remove(entity))
+  const takesTurns = new Component()
+  takesTurns.on('added', (entity, { speed }) => energyQueue.add(entity, speed))
+  takesTurns.on('removed', entity => energyQueue.remove(entity))
+  world.addComponent('takesTurns', takesTurns)
 
   // Demo world setup
   buildMap(world)

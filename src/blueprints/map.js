@@ -32,15 +32,17 @@ const buildMap = world => {
           createTile(world, position)
           break
         }
-        // case '"':
-        //   createUndergrowth(store, position)
-        //   break
+        case '"':
+          createTile(world, position)
+          // createUndergrowth(store, position)
+          break
         case '#':
           createWall(world, position)
           break
-        // case '+':
-        //   createDoor(store, position)
-        //   break
+        case '+':
+          // createDoor(store, position)
+          createTile(world, position)
+          break
         case '.':
           createTile(world, position)
           break
