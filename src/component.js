@@ -1,13 +1,29 @@
 class Component {
-  constructor() {
+  constructor({ onAdd, onRemove } = {}) {
     this.storage = new Map()
+
+    if (onAdd && typeof onAdd === 'function') {
+      this.onAdd = onAdd
+    }
+
+    if (onRemove && typeof onRemove === 'function') {
+      this.onRemove = onRemove
+    }
   }
 
   add(entity, value = true) {
+    if (this.onAdd) {
+      this.onAdd(entity, value)
+    }
+
     this.storage.set(entity, value)
   }
 
   remove(entity) {
+    if (this.onAdd) {
+      this.onRemove(entity)
+    }
+
     this.storage.delete(entity)
   }
 

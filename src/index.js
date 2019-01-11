@@ -1,25 +1,18 @@
-import { v4 as uuid } from 'uuid'
-
 import './index.css'
 import Renderer from './renderer'
 import EnergyQueue from './energyQueue'
 import InputHandler from './inputHandler'
 import BehaviourEngine from './behaviours'
 import Component from './component'
+import { createPlayer, createTile } from './blueprints'
 
 const run = async () => {
   const renderer = new Renderer()
   await renderer.load()
 
   const world = {
-    components: {
-      position: new Component(),
-      takesTurns: new Component(),
-      playerControlled: new Component(),
-    },
-    resources: {
-      inputHandler: new InputHandler(),
-    },
+    components: {},
+    resources: {},
   }
 
   const energyQueue = new EnergyQueue()
@@ -27,21 +20,27 @@ const run = async () => {
   let nextEntity
   let turnWaiting = false
 
+  world.components.position = new Component()
+  world.components.takesTurns = new Component({
+    onAdd: (entity, { speed }) => {
+      energyQueue.add(entity, speed)
+    },
+    onRemove: entity => {
+      energyQueue.remove(entity)
+    },
+  })
+  world.components.playerControlled = new Component()
+  world.resources.inputHandler = new InputHandler()
+
   /* Demo world setup */
-  {
-    const id = uuid()
-    world.components.position.add(id, { sprite: 'player', x: 13, y: 9, layer: 'foreground' })
-    world.components.takesTurns.add(id, { speed: 1, behaviour: 'playerControlled' })
-    world.components.playerControlled.add(id)
-  }
-  world.components.position.add(uuid(), { sprite: 'grass', x: 11, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 12, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 13, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 14, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 15, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 16, y: 9 })
-  world.components.position.add(uuid(), { sprite: 'grass', x: 17, y: 9 })
-  world.components.takesTurns.forEach(({ speed }, entity) => energyQueue.add(entity, speed))
+  createPlayer(world, { x: 13, y: 9 })
+  createTile(world, { sprite: 'grass', x: 11, y: 9 })
+  createTile(world, { sprite: 'grass', x: 12, y: 9 })
+  createTile(world, { sprite: 'grass', x: 13, y: 9 })
+  createTile(world, { sprite: 'grass', x: 14, y: 9 })
+  createTile(world, { sprite: 'grass', x: 15, y: 9 })
+  createTile(world, { sprite: 'grass', x: 16, y: 9 })
+  createTile(world, { sprite: 'grass', x: 17, y: 9 })
   /* */
 
   const animate = () => {
