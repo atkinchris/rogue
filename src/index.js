@@ -4,7 +4,7 @@ import EnergyQueue from './energyQueue'
 import InputHandler from './inputHandler'
 import BehaviourEngine from './behaviours'
 import Component from './component'
-import { createPlayer, createTile } from './blueprints'
+import buildMap from './blueprints/map'
 
 const run = async () => {
   const renderer = new Renderer()
@@ -21,27 +21,15 @@ const run = async () => {
   let turnWaiting = false
 
   world.components.position = new Component()
-  world.components.takesTurns = new Component({
-    onAdd: (entity, { speed }) => {
-      energyQueue.add(entity, speed)
-    },
-    onRemove: entity => {
-      energyQueue.remove(entity)
-    },
-  })
+  world.components.takesTurns = new Component()
   world.components.playerControlled = new Component()
   world.resources.inputHandler = new InputHandler()
 
-  /* Demo world setup */
-  createPlayer(world, { x: 13, y: 9 })
-  createTile(world, { sprite: 'grass', x: 11, y: 9 })
-  createTile(world, { sprite: 'grass', x: 12, y: 9 })
-  createTile(world, { sprite: 'grass', x: 13, y: 9 })
-  createTile(world, { sprite: 'grass', x: 14, y: 9 })
-  createTile(world, { sprite: 'grass', x: 15, y: 9 })
-  createTile(world, { sprite: 'grass', x: 16, y: 9 })
-  createTile(world, { sprite: 'grass', x: 17, y: 9 })
-  /* */
+  world.components.takesTurns.on('added', (entity, { speed }) => energyQueue.add(entity, speed))
+  world.components.takesTurns.on('removed', entity => energyQueue.remove(entity))
+
+  // Demo world setup
+  buildMap(world)
 
   const animate = () => {
     if (!turnWaiting && !nextEntity) {

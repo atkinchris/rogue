@@ -12,4 +12,9 @@ const createTile = (world, { x, y, sprite = 'grass' }) => {
   world.components.position.add(id, { sprite, x, y, layer: 'background' })
 }
 
-export { createPlayer, createTile }
+const createWall = (world, { x, y }) => {
+  const id = uuid()
+  world.components.position.add(id, { sprite: 'wall', x, y, layer: 'background' })
+}
+
+export { createPlayer, createTile, createWall }

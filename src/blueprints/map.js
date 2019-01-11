@@ -1,4 +1,4 @@
-import { createPlayer, createMonster, createWall, createDoor, createFloor, createUndergrowth } from '.'
+import { createPlayer, createTile, createWall } from '.'
 
 const MAP = [
   ' ###############',
@@ -19,7 +19,7 @@ const MAP = [
   ' ###############',
 ]
 
-const buildMap = ({ store }) => {
+const buildMap = world => {
   let player
 
   MAP.forEach((row, y) => {
@@ -28,25 +28,25 @@ const buildMap = ({ store }) => {
 
       switch (cell) {
         case '@': {
-          player = createPlayer(store, position)
-          createFloor(store, position)
+          player = createPlayer(world, position)
+          createTile(world, position)
           break
         }
-        case '"':
-          createUndergrowth(store, position)
-          break
+        // case '"':
+        //   createUndergrowth(store, position)
+        //   break
         case '#':
-          createWall(store, position)
+          createWall(world, position)
           break
-        case '+':
-          createDoor(store, position)
-          break
+        // case '+':
+        //   createDoor(store, position)
+        //   break
         case '.':
-          createFloor(store, position)
+          createTile(world, position)
           break
         case 'k':
-          createMonster(store, position)
-          createFloor(store, position)
+          // createMonster(store, position)
+          createTile(world, position)
           break
         default:
           break

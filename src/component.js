@@ -1,29 +1,18 @@
-class Component {
-  constructor({ onAdd, onRemove } = {}) {
+import EventEmitter from 'eventemitter3'
+
+class Component extends EventEmitter {
+  constructor() {
+    super()
     this.storage = new Map()
-
-    if (onAdd && typeof onAdd === 'function') {
-      this.onAdd = onAdd
-    }
-
-    if (onRemove && typeof onRemove === 'function') {
-      this.onRemove = onRemove
-    }
   }
 
   add(entity, value = true) {
-    if (this.onAdd) {
-      this.onAdd(entity, value)
-    }
-
+    super.emit('added', entity, value)
     this.storage.set(entity, value)
   }
 
   remove(entity) {
-    if (this.onAdd) {
-      this.onRemove(entity)
-    }
-
+    super.emit('removed', entity)
     this.storage.delete(entity)
   }
 
