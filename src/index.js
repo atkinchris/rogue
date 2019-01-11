@@ -5,6 +5,7 @@ import Renderer from './renderer'
 import EnergyQueue from './energyQueue'
 import InputHandler from './inputHandler'
 import BehaviourEngine from './behaviours'
+import Component from './component'
 
 const run = async () => {
   const renderer = new Renderer()
@@ -12,9 +13,9 @@ const run = async () => {
 
   const world = {
     components: {
-      position: new Map(),
-      takesTurns: new Map(),
-      playerControlled: new Set(),
+      position: new Component(),
+      takesTurns: new Component(),
+      playerControlled: new Component(),
     },
     resources: {
       inputHandler: new InputHandler(),
@@ -29,17 +30,17 @@ const run = async () => {
   /* Demo world setup */
   {
     const id = uuid()
-    world.components.position.set(id, { sprite: 'player', x: 13, y: 9, layer: 'foreground' })
-    world.components.takesTurns.set(id, { speed: 1, behaviour: 'playerControlled' })
+    world.components.position.add(id, { sprite: 'player', x: 13, y: 9, layer: 'foreground' })
+    world.components.takesTurns.add(id, { speed: 1, behaviour: 'playerControlled' })
     world.components.playerControlled.add(id)
   }
-  world.components.position.set(uuid(), { sprite: 'grass', x: 11, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 12, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 13, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 14, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 15, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 16, y: 9 })
-  world.components.position.set(uuid(), { sprite: 'grass', x: 17, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 11, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 12, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 13, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 14, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 15, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 16, y: 9 })
+  world.components.position.add(uuid(), { sprite: 'grass', x: 17, y: 9 })
   world.components.takesTurns.forEach(({ speed }, entity) => energyQueue.add(entity, speed))
   /* */
 

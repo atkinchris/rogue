@@ -10,7 +10,7 @@ const getAction = (world, entity) => {
     else if (keys.up) pos.y -= 1
     else if (keys.down) pos.y += 1
 
-    world.components.position.set(entity, pos)
+    world.components.position.add(entity, pos)
   }
 }
 
