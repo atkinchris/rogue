@@ -1,20 +1,22 @@
 import { v4 as uuid } from 'uuid'
 
 const createPlayer = (world, { x, y }) => {
-  const id = uuid()
-  world.components.position.add(id, { sprite: 'player', x, y, layer: 'foreground' })
-  world.components.takesTurns.add(id, { speed: 1, behaviour: 'playerControlled' })
-  world.components.playerControlled.add(id)
+  const entity = uuid()
+  world.getComponent('collides').add(entity)
+  world.getComponent('position').add(entity, { sprite: 'player', x, y, layer: 'foreground' })
+  world.getComponent('takesTurns').add(entity, { speed: 1, behaviour: 'playerControlled' })
+  world.getComponent('playerControlled').add(entity)
 }
 
 const createTile = (world, { x, y, sprite = 'grass' }) => {
-  const id = uuid()
-  world.components.position.add(id, { sprite, x, y, layer: 'background' })
+  const entity = uuid()
+  world.getComponent('position').add(entity, { sprite, x, y, layer: 'background' })
 }
 
 const createWall = (world, { x, y }) => {
-  const id = uuid()
-  world.components.position.add(id, { sprite: 'wall', x, y, layer: 'background' })
+  const entity = uuid()
+  world.getComponent('collides').add(entity)
+  world.getComponent('position').add(entity, { sprite: 'wall', x, y, layer: 'background' })
 }
 
 export { createPlayer, createTile, createWall }
