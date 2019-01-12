@@ -25,7 +25,15 @@ const run = async () => {
   world.addResource('collisionMap', collisionMap)
 
   world.addComponent('playerControlled', new Component())
-  world.addComponent('collides', new Component())
+
+  const collides = new Component()
+  collides.on('added', entity => {
+    const pos = world.getComponent('position').get(entity)
+    if (pos) {
+      collisionMap.addEntityAt(entity, pos)
+    }
+  })
+  world.addComponent('collides', collides)
 
   const position = new Component()
   position.on('added', (entity, pos) => {
