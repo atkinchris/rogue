@@ -39,7 +39,6 @@ class Renderer {
 
     position.forEach(entity => {
       const sprite = PIXI.Sprite.fromFrame(entity.sprite)
-      sprite.anchor.set(0.5)
       sprite.x = entity.x * TILE_SIZE
       sprite.y = entity.y * TILE_SIZE
 
