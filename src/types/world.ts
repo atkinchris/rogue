@@ -1,5 +1,5 @@
 import CollisionMap from './collisionMap'
-import EnergyQueue from '../energyQueue'
+import EnergyQueue from './energyQueue'
 import InputHandler from '../inputHandler'
 import Entity from './entity'
 import PositionMap from './positionMap'
@@ -38,7 +38,7 @@ class World {
     }
 
     if (entity.takesTurns) {
-      this.energyQueue.add(entity, entity.takesTurns.speed)
+      this.energyQueue.add(entity)
     }
   }
 

@@ -12,7 +12,7 @@ const run = async () => {
 
   const world = new World()
   const behaviourEngine = new BehaviourEngine(world)
-  let nextEntity: Entity
+  let nextEntity: Entity | undefined
   let turnWaiting = false
 
   // Demo world setup
