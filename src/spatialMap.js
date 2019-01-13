@@ -31,7 +31,7 @@ class SpatialMap {
   }
 
   getEntityAt(position) {
-    return this.mapByPosition(positionToString(position))
+    return this.mapByPosition.get(positionToString(position))
   }
 }
 
