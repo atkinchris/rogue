@@ -1,8 +1,20 @@
-const getAction = (world, entity) => {
-  const keys = world.getResource('inputHandler').getKeys()
+import World from '../types/world'
+import Entity from '../types/entity'
+
+import Action from './action'
+
+interface Keys {
+  left?: boolean
+  right?: boolean
+  up?: boolean
+  down?: boolean
+}
+
+const getAction = (world: World, entity: Entity) => {
+  const keys = <Keys>world.inputHandler.getKeys()
 
   if (!!keys && (keys.left || keys.right || keys.up || keys.down)) {
-    const action = {
+    const action = <Action>{
       subject: entity,
       type: 'moveTo',
       payload: {

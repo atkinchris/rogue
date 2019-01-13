@@ -27,7 +27,7 @@ const common = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: [/\.jsx?$/, /\.tsx?$/],
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -38,7 +38,7 @@ const common = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   plugins: [
     new MiniCssExtractPlugin({ fileName: '[name].[contenthash:8].css' }),

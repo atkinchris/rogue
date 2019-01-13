@@ -1,4 +1,4 @@
-import Entity from '../entity'
+import Entity from '../types/entity'
 
 const createPlayer = (world, { x, y }) =>
   Entity.Create(world, {

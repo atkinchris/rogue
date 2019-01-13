@@ -1,12 +1,20 @@
 {
-  "parser": "babel-eslint",
+  "parser": "typescript-eslint-parser",
   "env": {
     "browser": true,
     "jest": true
   },
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["typescript"],
   "rules": {
     "semi": ["error", "never"],
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-unused-vars": "warn",
+    "typescript/no-unused-vars": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
   }
 }
