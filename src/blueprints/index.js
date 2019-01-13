@@ -1,22 +1,24 @@
-import { v4 as uuid } from 'uuid'
+import Entity from '../entity'
 
-const createPlayer = (world, { x, y }) => {
-  const entity = uuid()
-  world.getComponent('collides').add(entity)
-  world.getComponent('position').add(entity, { sprite: 'player', x, y, layer: 'foreground' })
-  world.getComponent('takesTurns').add(entity, { speed: 1, behaviour: 'playerControlled' })
-  world.getComponent('playerControlled').add(entity)
-}
+const createPlayer = (world, { x, y }) =>
+  Entity.Create(world, {
+    collides: true,
+    position: { x, y },
+    sprite: { name: 'player', layer: 'foreground' },
+    takesTurns: { speed: 1, behaviour: 'playerControlled' },
+  })
 
-const createTile = (world, { x, y, sprite = 'grass' }) => {
-  const entity = uuid()
-  world.getComponent('position').add(entity, { sprite, x, y, layer: 'background' })
-}
+const createGrass = (world, { x, y }) =>
+  Entity.Create(world, {
+    position: { x, y },
+    sprite: { name: 'grass', layer: 'background' },
+  })
 
-const createWall = (world, { x, y, frame }) => {
-  const entity = uuid()
-  world.getComponent('collides').add(entity)
-  world.getComponent('position').add(entity, { sprite: 'wall', x, y, layer: 'background', frame })
-}
+const createWall = (world, { x, y, frame }) =>
+  Entity.Create(world, {
+    position: { x, y },
+    sprite: { name: 'wall', layer: 'background', frame },
+    collides: true,
+  })
 
-export { createPlayer, createTile, createWall }
+export { createPlayer, createGrass, createWall }

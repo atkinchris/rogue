@@ -34,15 +34,26 @@ class Renderer {
     })
   }
 
-  render({ components: { position } }) {
+  render(world) {
     Object.values(this.layers).forEach(layer => layer.removeChildren())
 
-    position.forEach(entity => {
-      const sprite = PIXI.Sprite.fromFrame(`${entity.sprite}_${entity.frame || 0}`)
-      sprite.x = entity.x * TILE_SIZE
-      sprite.y = entity.y * TILE_SIZE
+    const entities = world
+      .getResource('positionMap')
+      .search({
+        minX: 0,
+        minY: 0,
+        maxX: 20,
+        maxY: 16,
+      })
+      .map(({ id }) => world.getEntityById(id))
+      .filter(entity => !!entity.sprite)
 
-      this.layers[entity.layer || 'background'].addChild(sprite)
+    entities.forEach(({ position: { x, y }, sprite: { name: spriteName, frame = 0, layer = 'background' } }) => {
+      const sprite = PIXI.Sprite.fromFrame(`${spriteName}_${frame}`)
+      sprite.x = x * TILE_SIZE
+      sprite.y = y * TILE_SIZE
+
+      this.layers[layer].addChild(sprite)
     })
 
     this.app.render()

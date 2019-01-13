@@ -1,4 +1,4 @@
-import { createPlayer, createTile, createWall } from '.'
+import { createPlayer, createGrass, createWall } from '.'
 
 const MAP = [
   ' ###############',
@@ -29,11 +29,11 @@ const buildMap = world => {
       switch (cell) {
         case '@': {
           player = createPlayer(world, position)
-          createTile(world, position)
+          createGrass(world, position)
           break
         }
         case '"':
-          createTile(world, position)
+          createGrass(world, position)
           // createUndergrowth(store, position)
           break
         case '#':
@@ -41,14 +41,14 @@ const buildMap = world => {
           break
         case '+':
           // createDoor(store, position)
-          createTile(world, position)
+          createGrass(world, position)
           break
         case '.':
-          createTile(world, position)
+          createGrass(world, position)
           break
         case 'k':
           // createMonster(store, position)
-          createTile(world, position)
+          createGrass(world, position)
           break
         default:
           break

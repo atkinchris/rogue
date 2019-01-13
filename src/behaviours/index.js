@@ -10,7 +10,7 @@ class BehaviourEngine {
   }
 
   getAction(behaviour, entity) {
-    BEHAVIOURS[behaviour](this.world, entity)
+    return BEHAVIOURS[behaviour](this.world, entity)
   }
 }
 
