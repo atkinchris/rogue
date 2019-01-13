@@ -38,7 +38,7 @@ class Renderer {
     Object.values(this.layers).forEach(layer => layer.removeChildren())
 
     position.forEach(entity => {
-      const sprite = PIXI.Sprite.fromFrame(entity.sprite)
+      const sprite = PIXI.Sprite.fromFrame(`${entity.sprite}_${entity.frame || 0}`)
       sprite.x = entity.x * TILE_SIZE
       sprite.y = entity.y * TILE_SIZE
 

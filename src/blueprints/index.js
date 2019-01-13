@@ -13,10 +13,10 @@ const createTile = (world, { x, y, sprite = 'grass' }) => {
   world.getComponent('position').add(entity, { sprite, x, y, layer: 'background' })
 }
 
-const createWall = (world, { x, y }) => {
+const createWall = (world, { x, y, frame }) => {
   const entity = uuid()
   world.getComponent('collides').add(entity)
-  world.getComponent('position').add(entity, { sprite: 'wall', x, y, layer: 'background' })
+  world.getComponent('position').add(entity, { sprite: 'wall', x, y, layer: 'background', frame })
 }
 
 export { createPlayer, createTile, createWall }
