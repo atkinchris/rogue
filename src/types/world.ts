@@ -1,4 +1,4 @@
-import CollisionMap from '../spatialMap'
+import CollisionMap from './collisionMap'
 import EnergyQueue from '../energyQueue'
 import InputHandler from '../inputHandler'
 import Entity from './entity'
@@ -22,7 +22,7 @@ class World {
 
   handleEntityMoved(entity: Entity) {
     if (entity.collides) {
-      this.collisionMap.addEntityAt(entity.id, entity.position)
+      this.collisionMap.addEntityAt(entity, entity.position)
     }
   }
 
@@ -34,7 +34,7 @@ class World {
     }
 
     if (entity.position && entity.collides) {
-      this.collisionMap.addEntityAt(entity.id, entity.position)
+      this.collisionMap.addEntityAt(entity, entity.position)
     }
 
     if (entity.takesTurns) {
