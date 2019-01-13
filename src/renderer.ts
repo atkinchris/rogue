@@ -5,13 +5,19 @@ import World from './types/world'
 import Entity from './types/entity'
 
 const TILE_SIZE = 32
+const CAMERA_SIZE = {
+  WIDTH: 19,
+  HEIGHT: 16,
+}
 
 class Renderer {
   app: PIXI.Application
   layers: Map<string, PIXI.Container>
 
   constructor() {
-    const app = new PIXI.Application(800, 600, { backgroundColor: 0x1099bb })
+    const app = new PIXI.Application(CAMERA_SIZE.WIDTH * TILE_SIZE, CAMERA_SIZE.HEIGHT * TILE_SIZE, {
+      transparent: true,
+    })
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
 
     const container = document.getElementById('container')
@@ -45,15 +51,20 @@ class Renderer {
   render(world: World) {
     this.layers.forEach(layer => layer.removeChildren())
 
-    const entities = world.positionMap.getInRectangle(0, 0, 20, 16).reduce((out: Entity[], { id }): Entity[] => {
-      const entity = world.getEntityById(id)
+    const cameraX = 0
+    const cameraY = 0
 
-      if (entity && entity.sprite) {
-        out.push(entity)
-      }
+    const entities = world.positionMap
+      .getInRectangle(cameraX, cameraY, cameraX + CAMERA_SIZE.WIDTH, cameraY + CAMERA_SIZE.HEIGHT)
+      .reduce((out: Entity[], { id }): Entity[] => {
+        const entity = world.getEntityById(id)
 
-      return out
-    }, [])
+        if (entity && entity.sprite) {
+          out.push(entity)
+        }
+
+        return out
+      }, [])
 
     entities.forEach(entity => {
       const {
