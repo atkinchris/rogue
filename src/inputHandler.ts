@@ -1,15 +1,14 @@
 const EVENT_DOWN = 'keydown'
 const EVENT_UP = 'keyup'
 
-const INPUT_MAP = {
-  KeyA: 'left',
-  KeyD: 'right',
-  KeyW: 'up',
-  KeyS: 'down',
+const INPUT_MAP = new Map([['KeyA', 'left'], ['KeyD', 'right'], ['KeyW', 'up'], ['KeyS', 'down']])
+
+interface Keys {
+  [key: string]: boolean
 }
 
 class InputHandler {
-  keys: object
+  keys: Keys
   newEvents: boolean
 
   constructor() {
@@ -17,15 +16,17 @@ class InputHandler {
     this.newEvents = false
 
     window.addEventListener(EVENT_DOWN, event => {
-      if (event && !event.repeat && INPUT_MAP[event.code]) {
-        this.keys[INPUT_MAP[event.code]] = true
+      const input = INPUT_MAP.get(event.code)
+      if (event && !event.repeat && input) {
+        this.keys[input] = true
         this.newEvents = true
       }
     })
 
     window.addEventListener(EVENT_UP, event => {
-      if (event && !event.repeat && INPUT_MAP[event.code]) {
-        this.keys[INPUT_MAP[event.code]] = false
+      const input = INPUT_MAP.get(event.code)
+      if (event && !event.repeat && input) {
+        this.keys[input] = false
         this.newEvents = true
       }
     })

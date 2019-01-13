@@ -3,15 +3,8 @@ import Entity from '../types/entity'
 
 import Action from './action'
 
-interface Keys {
-  left?: boolean
-  right?: boolean
-  up?: boolean
-  down?: boolean
-}
-
 const getAction = (world: World, entity: Entity) => {
-  const keys = <Keys>world.inputHandler.getKeys()
+  const keys = world.inputHandler.getKeys()
 
   if (!!keys && (keys.left || keys.right || keys.up || keys.down)) {
     const action = <Action>{
