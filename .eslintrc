@@ -9,8 +9,8 @@
   "rules": {
     "semi": ["error", "never"],
     "object-curly-newline": "off",
-    "no-unused-vars": "warn",
-    "typescript/no-unused-vars": "warn"
+    "typescript/no-unused-vars": "error",
+    "lines-between-class-members": "off"
   },
   "settings": {
     "import/resolver": {

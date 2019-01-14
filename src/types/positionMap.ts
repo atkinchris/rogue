@@ -34,9 +34,9 @@ class PositionMap {
         maxY: y + height,
       })
       .map(
-        ({ minX: x, minY: y, id }: { minX: number; minY: number; id: string }): PositionResult => ({
-          x,
-          y,
+        ({ minX, minY, id }: { minX: number; minY: number; id: string }): PositionResult => ({
+          x: minX,
+          y: minY,
           id,
         })
       )

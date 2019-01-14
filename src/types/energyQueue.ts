@@ -22,13 +22,13 @@ class EnergyQueue {
   next() {
     if (this.queue.isEmpty()) {
       this.entities.forEach((speed, entity) => {
-        speed += 1
+        const newSpeed = speed + 1
 
-        if (speed > entity.takesTurns.speed) {
+        if (newSpeed > entity.takesTurns.speed) {
           this.queue.push(entity)
         }
 
-        this.entities.set(entity, speed)
+        this.entities.set(entity, newSpeed)
       })
     }
 
