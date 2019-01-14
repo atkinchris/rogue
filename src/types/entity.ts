@@ -5,11 +5,11 @@ import Position from './position'
 import Sprite from './sprite'
 import World from './world'
 
-interface EntityOptions {
+export interface EntityOptions {
   sprite: Sprite
-  collides: boolean
+  collides?: boolean
   position: Position
-  takesTurns: TakesTurns
+  takesTurns?: TakesTurns
 }
 
 interface TakesTurns {
@@ -23,14 +23,14 @@ class Entity extends EventEmitter {
   sprite: Sprite
   collides: boolean
   position: Position
-  takesTurns: TakesTurns
+  takesTurns?: TakesTurns
 
   constructor({ sprite, collides, position, takesTurns }: EntityOptions) {
     super()
     this.id = uuid()
 
     this.sprite = sprite
-    this.collides = collides
+    this.collides = collides || false
     this.position = position
     this.takesTurns = takesTurns
   }

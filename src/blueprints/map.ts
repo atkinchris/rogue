@@ -1,4 +1,5 @@
 import { createPlayer, createGrass, createWall } from '.'
+import World from '../types/world'
 
 const MAP = [
   ' ###############',
@@ -19,7 +20,7 @@ const MAP = [
   ' ###############',
 ]
 
-const buildMap = world => {
+const buildMap = (world: World) => {
   let player
 
   MAP.forEach((row, y) => {

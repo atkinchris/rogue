@@ -1,6 +1,8 @@
 import Entity from '../types/entity'
+import World from '../types/world'
+import Position from '../types/position'
 
-const createPlayer = (world, { x, y }) =>
+const createPlayer = (world: World, { x, y }: Position) =>
   Entity.Create(world, {
     collides: true,
     position: { x, y },
@@ -8,16 +10,16 @@ const createPlayer = (world, { x, y }) =>
     takesTurns: { speed: 1, behaviour: 'playerControlled' },
   })
 
-const createGrass = (world, { x, y }) =>
+const createGrass = (world: World, { x, y }: Position) =>
   Entity.Create(world, {
     position: { x, y },
     sprite: { name: 'grass', layer: 'background' },
   })
 
-const createWall = (world, { x, y, frame }) =>
+const createWall = (world: World, { x, y }: Position) =>
   Entity.Create(world, {
     position: { x, y },
-    sprite: { name: 'wall', layer: 'background', frame },
+    sprite: { name: 'wall', layer: 'background' },
     collides: true,
   })
 

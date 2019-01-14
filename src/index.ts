@@ -24,7 +24,7 @@ const run = async () => {
     }
 
     if (nextEntity) {
-      const action = behaviourEngine.getAction(nextEntity.takesTurns.behaviour, nextEntity)
+      const action = behaviourEngine.getAction(nextEntity.takesTurns!.behaviour, nextEntity)
       turnWaiting = !!action
 
       if (action && action.type === 'moveTo') {
