@@ -4,6 +4,7 @@ import * as PIXI from 'pixi.js'
 import World from './types/world'
 import Entity from './types/entity'
 
+const DEBUG = false
 const TILE_SIZE = 32
 const CAMERA_SIZE = {
   WIDTH: 19,
@@ -94,7 +95,7 @@ class Renderer {
       sprite.x = x * TILE_SIZE
       sprite.y = y * TILE_SIZE
 
-      if (frame !== undefined) {
+      if (DEBUG && frame !== undefined) {
         const textObject = this.getTextObject()
         textObject.text = `${frame}`
         sprite.addChild(textObject)
