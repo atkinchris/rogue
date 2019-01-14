@@ -59,9 +59,9 @@ class World {
                 .length > 0
           )
 
-        console.log(entity.position, matchingNeighbours)
+        const frame = neighboursToFrame(matchingNeighbours)
 
-        entity.setFrame(neighboursToFrame(matchingNeighbours))
+        entity.setFrame(frame)
       }
     })
   }

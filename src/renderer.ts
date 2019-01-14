@@ -94,7 +94,7 @@ class Renderer {
       sprite.x = x * TILE_SIZE
       sprite.y = y * TILE_SIZE
 
-      if (frame) {
+      if (frame !== undefined) {
         const textObject = this.getTextObject()
         textObject.text = `${frame}`
         sprite.addChild(textObject)
