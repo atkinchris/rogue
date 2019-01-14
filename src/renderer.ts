@@ -9,10 +9,13 @@ const CAMERA_SIZE = {
   WIDTH: 19,
   HEIGHT: 16,
 }
+const TEXT_POOL_LIMIT = CAMERA_SIZE.WIDTH * CAMERA_SIZE.HEIGHT * 2
 
 class Renderer {
   app: PIXI.Application
   layers: Map<string, PIXI.Container>
+  textPool: PIXI.Text[]
+  textPoolIndex: number
 
   constructor() {
     const app = new PIXI.Application(CAMERA_SIZE.WIDTH * TILE_SIZE, CAMERA_SIZE.HEIGHT * TILE_SIZE, {
@@ -36,6 +39,22 @@ class Renderer {
     this.layers = new Map()
     this.layers.set('background', background)
     this.layers.set('foreground', foreground)
+
+    this.textPool = Array.from(
+      { length: TEXT_POOL_LIMIT },
+      () => new PIXI.Text('', { fontFamily: 'monospace', fontSize: 18, fill: 'red', align: 'center' })
+    )
+    this.textPoolIndex = 0
+  }
+
+  getTextObject() {
+    this.textPoolIndex = this.textPoolIndex + 1
+
+    if (this.textPoolIndex >= TEXT_POOL_LIMIT) {
+      this.textPoolIndex = 0
+    }
+
+    return this.textPool[this.textPoolIndex]
   }
 
   async load() {
@@ -76,9 +95,9 @@ class Renderer {
       sprite.y = y * TILE_SIZE
 
       if (frame) {
-        sprite.addChild(
-          new PIXI.Text(`${frame}`, { fontFamily: 'monospace', fontSize: 18, fill: 'red', align: 'center' })
-        )
+        const textObject = this.getTextObject()
+        textObject.text = `${frame}`
+        sprite.addChild(textObject)
       }
 
       this.layers.get(layer)!.addChild(sprite)

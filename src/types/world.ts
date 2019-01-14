@@ -59,6 +59,8 @@ class World {
                 .length > 0
           )
 
+        console.log(entity.position, matchingNeighbours)
+
         entity.setFrame(neighboursToFrame(matchingNeighbours))
       }
     })
