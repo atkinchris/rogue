@@ -1,6 +1,7 @@
 import rbush from 'rbush'
 
 import Entity from './entity'
+import Position from './position'
 
 interface PositionResult {
   x: number
@@ -25,7 +26,7 @@ class PositionMap {
     })
   }
 
-  getInRectangle(x: number, y: number, width: number, height: number): [PositionResult] {
+  getInRectangle(x: number, y: number, width: number, height: number): PositionResult[] {
     return this.tree
       .search({
         minX: x,
@@ -40,6 +41,17 @@ class PositionMap {
           id,
         })
       )
+  }
+
+  getNeighbours(position: Position): PositionResult[][] {
+    const neighbours = this.getInRectangle(position.x - 1, position.y - 1, 3, 3)
+
+    return [
+      neighbours.filter(pos => pos.x === position.x + 0 && pos.y === position.y + 1),
+      neighbours.filter(pos => pos.x === position.x + 1 && pos.y === position.y + 0),
+      neighbours.filter(pos => pos.x === position.x + 0 && pos.y === position.y - 1),
+      neighbours.filter(pos => pos.x === position.x - 1 && pos.y === position.y + 0),
+    ]
   }
 }
 

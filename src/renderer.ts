@@ -69,11 +69,17 @@ class Renderer {
     entities.forEach(entity => {
       const {
         position: { x, y },
-        sprite: { name: spriteName, frame = 0, layer = 'background' },
+        sprite: { name: spriteName, frame, layer = 'background' },
       } = entity
-      const sprite = PIXI.Sprite.fromFrame(`${spriteName}_${frame}`)
+      const sprite = PIXI.Sprite.fromFrame(`${spriteName}_${frame || 0}`)
       sprite.x = x * TILE_SIZE
       sprite.y = y * TILE_SIZE
+
+      if (frame) {
+        sprite.addChild(
+          new PIXI.Text(`${frame}`, { fontFamily: 'monospace', fontSize: 18, fill: 'red', align: 'center' })
+        )
+      }
 
       this.layers.get(layer)!.addChild(sprite)
     })

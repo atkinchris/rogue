@@ -19,7 +19,7 @@ const createGrass = (world: World, { x, y }: Position) =>
 const createWall = (world: World, { x, y }: Position) =>
   Entity.Create(world, {
     position: { x, y },
-    sprite: { name: 'wall', layer: 'background' },
+    sprite: { name: 'wall', layer: 'background', isContinuous: true },
     collides: true,
   })
 

@@ -4,6 +4,8 @@ import InputHandler from '../inputHandler'
 import Entity from './entity'
 import PositionMap from './positionMap'
 
+import neighboursToFrame from '../utils/neighboursToFrame'
+
 class World {
   entities: Map<string, Entity>
   collisionMap: CollisionMap
@@ -44,6 +46,22 @@ class World {
 
   getEntityById(id: string) {
     return this.entities.get(id)
+  }
+
+  updateFrames() {
+    this.entities.forEach(entity => {
+      if (entity.sprite && entity.sprite.isContinuous) {
+        const matchingNeighbours = this.positionMap
+          .getNeighbours(entity.position)
+          .map(
+            items =>
+              items.map(item => this.getEntityById(item.id)).filter(e => e && e.sprite.name === entity.sprite.name)
+                .length > 0
+          )
+
+        entity.setFrame(neighboursToFrame(matchingNeighbours))
+      }
+    })
   }
 }
 
