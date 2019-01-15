@@ -89,11 +89,13 @@ class Renderer {
     entities.forEach(entity => {
       const {
         position: { x, y },
-        sprite: { name: spriteName, frame, layer = 'background' },
+        sprite: { name: spriteName, frame, layer = 'background', rotation = 0 },
       } = entity
       const sprite = PIXI.Sprite.fromFrame(`${spriteName}_${frame || 0}`)
-      sprite.x = x * TILE_SIZE
-      sprite.y = y * TILE_SIZE
+      sprite.anchor.set(0.5)
+      sprite.x = x * TILE_SIZE + 0.5 * TILE_SIZE
+      sprite.y = y * TILE_SIZE + 0.5 * TILE_SIZE
+      sprite.rotation = rotation
 
       if (DEBUG && frame !== undefined) {
         const textObject = this.getTextObject()

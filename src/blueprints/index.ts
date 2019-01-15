@@ -23,4 +23,11 @@ const createWall = (world: World, { x, y }: Position) =>
     collides: true,
   })
 
-export { createPlayer, createGrass, createWall }
+const createDoor = (world: World, { x, y }: Position) =>
+  Entity.Create(world, {
+    position: { x, y },
+    sprite: { name: 'door', frame: 0, layer: 'foreground', fitsInWalls: true },
+    collides: true,
+  })
+
+export { createPlayer, createGrass, createWall, createDoor }

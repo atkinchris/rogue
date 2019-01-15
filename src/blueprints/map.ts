@@ -1,4 +1,4 @@
-import { createPlayer, createGrass, createWall } from '.'
+import { createPlayer, createGrass, createWall, createDoor } from '.'
 import World from '../types/world'
 
 const MAP = [
@@ -41,7 +41,7 @@ const buildMap = (world: World) => {
           createWall(world, position)
           break
         case '+':
-          // createDoor(store, position)
+          createDoor(world, position)
           createGrass(world, position)
           break
         case '.':

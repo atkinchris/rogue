@@ -3,4 +3,6 @@ export default interface Sprite {
   frame?: number
   layer?: string
   isContinuous?: boolean
+  fitsInWalls?: boolean
+  rotation?: number
 }

@@ -40,10 +40,6 @@ class Entity extends EventEmitter {
     super.emit('entityMoved', this)
   }
 
-  setFrame(frame: number) {
-    this.sprite.frame = frame
-  }
-
   static Create(world: World, options: EntityOptions) {
     const entity = new Entity(options)
 

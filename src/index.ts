@@ -17,7 +17,7 @@ const run = async () => {
 
   // Demo world setup
   buildMap(world)
-  world.updateFrames()
+  world.updateSprites()
 
   const animate = () => {
     if (!turnWaiting && !nextEntity) {
