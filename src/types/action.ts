@@ -1,8 +1,9 @@
-import Entity from './entity'
-
-export default interface Action {
-  payload: any
-  type: string
-  subject: Entity
+class Action {
   cancelled?: boolean
+
+  cancel() {
+    this.cancelled = true
+  }
 }
+
+export default Action

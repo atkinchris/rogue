@@ -28,6 +28,7 @@ const createDoor = (world: World, { x, y }: Position) =>
     position: { x, y },
     sprite: { name: 'door', frame: 0, layer: 'foreground', fitsInWalls: true },
     collides: true,
+    isDoor: true,
   })
 
 export { createPlayer, createGrass, createWall, createDoor }

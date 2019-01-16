@@ -3,17 +3,19 @@ import Action from '../types/action'
 import System from '../types/system'
 import World from '../types/world'
 
+import MoveToAction from '../actions/moveTo'
+import CollisionAction from '../actions/collision'
+
 const collisionSystem: System = {
   run: (world: World, actions: Action[]) =>
     actions.reduce((out: Action[], action: Action) => {
-      if (action.type === 'moveTo') {
-        const entitiesAtLocation = world.positionMap.getAtPoint(action.payload)
-
+      if (action instanceof MoveToAction) {
+        const entitiesAtLocation = world.positionMap.getAtPoint(action.destination)
         const collision = entitiesAtLocation && entitiesAtLocation.find(e => e.collides)
 
         if (collision) {
-          action.type = 'collision'
-          action.payload = collision
+          action.cancel()
+          out.push(new CollisionAction(action.entity, collision))
         }
       }
 

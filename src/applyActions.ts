@@ -1,16 +1,13 @@
-import Action from './types/action'
 import World from './types/world'
+import Action from './types/action'
+import MoveToAction from './actions/moveTo'
 
 const applyActions = (world: World, actions: Action[]) => {
   actions
     .filter(action => !action.cancelled)
     .forEach(action => {
-      switch (action.type) {
-        case 'moveTo':
-          action.subject.moveTo(action.payload)
-          break
-        default:
-          break
+      if (action instanceof MoveToAction) {
+        action.entity.moveTo(action.destination)
       }
     })
 }

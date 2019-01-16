@@ -7,7 +7,6 @@ import applyActions from './applyActions'
 
 import './index.css'
 import ActionsEngine from './systems'
-import collisionSystem from './systems/collision'
 
 const run = async () => {
   const renderer = new Renderer()
@@ -18,8 +17,6 @@ const run = async () => {
   const actionsEngine = new ActionsEngine(world)
   let nextEntity: Entity | undefined
   let turnWaiting = false
-
-  actionsEngine.addSystem(collisionSystem)
 
   // Demo world setup
   buildMap(world)
