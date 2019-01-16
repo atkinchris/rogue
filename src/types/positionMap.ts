@@ -5,13 +5,9 @@ import Position from './position'
 
 const positionToString = ({ x, y }: { x: number; y: number }) => `${x},${y}`
 
-interface PositionResult {
+interface PositionEntry {
   x: number
   y: number
-  id: string
-}
-
-interface PositionEntry {
   minX: number
   maxX: number
   minY: number
@@ -36,6 +32,8 @@ class PositionMap {
     }
 
     const entry = {
+      x: entity.position.x,
+      y: entity.position.y,
       minX: entity.position.x,
       maxX: entity.position.x,
       minY: entity.position.y,
@@ -52,11 +50,11 @@ class PositionMap {
   }
 
   remove(entity: Entity) {
-    const positionEntry = this.entriesById.get(entity.id)
-    this.tree.remove(positionEntry)
+    const oldPosition = this.entriesById.get(entity.id)!
+    this.tree.remove(oldPosition)
     this.entriesById.delete(entity.id)
 
-    const positionHash = positionToString(entity.position)
+    const positionHash = positionToString(oldPosition)
     const set = this.mapByPosition.get(positionHash)
 
     if (set) {
@@ -69,24 +67,16 @@ class PositionMap {
     return set && Array.from(set)
   }
 
-  getInRectangle(x: number, y: number, width: number, height: number): PositionResult[] {
-    return this.tree
-      .search({
-        minX: x,
-        minY: y,
-        maxX: x + width,
-        maxY: y + height,
-      })
-      .map(
-        ({ minX, minY, id }: { minX: number; minY: number; id: string }): PositionResult => ({
-          x: minX,
-          y: minY,
-          id,
-        })
-      )
+  getInRectangle(x: number, y: number, width: number, height: number): PositionEntry[] {
+    return this.tree.search({
+      minX: x,
+      minY: y,
+      maxX: x + width,
+      maxY: y + height,
+    })
   }
 
-  getNeighbours(position: Position): PositionResult[][] {
+  getNeighbours(position: Position): PositionEntry[][] {
     const neighbours = this.getInRectangle(position.x - 1, position.y - 1, 3, 3)
 
     return [
