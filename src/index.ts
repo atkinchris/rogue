@@ -3,10 +3,11 @@ import BehaviourEngine from './behaviours'
 import buildMap from './blueprints/map'
 import World from './types/world'
 import Entity from './types/entity'
-import processAction from './processActions'
 import applyActions from './applyActions'
 
 import './index.css'
+import ActionsEngine from './systems'
+import collisionSystem from './systems/collision'
 
 const run = async () => {
   const renderer = new Renderer()
@@ -14,8 +15,11 @@ const run = async () => {
 
   const world = new World()
   const behaviourEngine = new BehaviourEngine(world)
+  const actionsEngine = new ActionsEngine(world)
   let nextEntity: Entity | undefined
   let turnWaiting = false
+
+  actionsEngine.addSystem(collisionSystem)
 
   // Demo world setup
   buildMap(world)
@@ -31,7 +35,8 @@ const run = async () => {
       turnWaiting = !!action
 
       if (action) {
-        applyActions(world, processAction(world, action))
+        const resultingActions = actionsEngine.run(action)
+        applyActions(world, resultingActions)
       }
     }
 

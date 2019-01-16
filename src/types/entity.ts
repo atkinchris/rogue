@@ -10,6 +10,7 @@ export interface EntityOptions {
   collides?: boolean
   position: Position
   takesTurns?: TakesTurns
+  isDoor?: boolean
 }
 
 interface TakesTurns {
@@ -24,8 +25,9 @@ class Entity extends EventEmitter {
   collides: boolean
   position: Position
   takesTurns?: TakesTurns
+  isDoor?: boolean
 
-  constructor({ sprite, collides, position, takesTurns }: EntityOptions) {
+  constructor({ sprite, collides, position, takesTurns, isDoor }: EntityOptions) {
     super()
     this.id = uuid()
 
@@ -33,6 +35,7 @@ class Entity extends EventEmitter {
     this.collides = collides || false
     this.position = position
     this.takesTurns = takesTurns
+    this.isDoor = isDoor
   }
 
   moveTo(position: Position) {

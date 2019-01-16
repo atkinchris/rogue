@@ -24,7 +24,7 @@ class EnergyQueue {
       this.entities.forEach((speed, entity) => {
         const newSpeed = speed + 1
 
-        if (newSpeed > entity.takesTurns.speed) {
+        if (newSpeed > entity.takesTurns!.speed) {
           this.queue.push(entity)
         }
 
