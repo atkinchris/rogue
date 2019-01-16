@@ -39,7 +39,16 @@ class Entity extends EventEmitter {
   }
 
   moveTo(position: Position) {
+    if (this.position.x < position.x) {
+      this.sprite.flip = true
+    }
+
+    if (this.position.x > position.x) {
+      this.sprite.flip = false
+    }
+
     this.position = position
+
     super.emit('entityMoved', this)
   }
 

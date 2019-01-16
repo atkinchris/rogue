@@ -5,4 +5,5 @@ export default interface Sprite {
   isContinuous?: boolean
   fitsInWalls?: boolean
   rotation?: number
+  flip?: boolean
 }
