@@ -1,7 +1,7 @@
 const EVENT_DOWN = 'keydown'
 const EVENT_UP = 'keyup'
 
-const INPUT_MAP = new Map([['KeyA', 'left'], ['KeyD', 'right'], ['KeyW', 'up'], ['KeyS', 'down']])
+const INPUT_MAP = new Map([['a', 'left'], ['d', 'right'], ['w', 'up'], ['s', 'down']])
 
 interface Keys {
   [key: string]: boolean
@@ -16,17 +16,19 @@ class InputHandler {
     this.newEvents = false
 
     window.addEventListener(EVENT_DOWN, event => {
-      const input = INPUT_MAP.get(event.code)
+      const input = INPUT_MAP.get(event.key.toLowerCase())
       if (event && !event.repeat && input) {
         this.keys[input] = true
+        this.keys.shift = event.shiftKey
         this.newEvents = true
       }
     })
 
     window.addEventListener(EVENT_UP, event => {
-      const input = INPUT_MAP.get(event.code)
+      const input = INPUT_MAP.get(event.key.toLowerCase())
       if (event && !event.repeat && input) {
         this.keys[input] = false
+        this.keys.shift = false
         this.newEvents = true
       }
     })

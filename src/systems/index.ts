@@ -2,10 +2,12 @@ import Action from '../types/action'
 import World from '../types/world'
 import System from '../types/system'
 
+import interactionEntities from './interactionEntities'
 import collision from './collision'
 import bumpDoors from './bumpDoors'
+import interactDoors from './interactDoors'
 
-const systems = [collision, bumpDoors]
+const systems = [interactionEntities, collision, bumpDoors, interactDoors]
 
 class ActionsEngine {
   systems: System[]
