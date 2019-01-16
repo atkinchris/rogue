@@ -29,9 +29,9 @@ const run = async () => {
       turnWaiting = !!action
 
       if (action && action.type === 'moveTo') {
-        const collision = world.collisionMap.isEntityAt(action.payload)
+        const entitiesAtLocation = world.positionMap.getAtPoint(action.payload)
 
-        if (collision) {
+        if (entitiesAtLocation && entitiesAtLocation.some(e => e.collides)) {
           action.cancelled = true
         } else {
           action.subject.moveTo(action.payload)
