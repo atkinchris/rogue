@@ -2,9 +2,11 @@ import Renderer from './renderer'
 import BehaviourEngine from './behaviours'
 import buildMap from './blueprints/map'
 import World from './types/world'
+import Entity from './types/entity'
+import processAction from './processActions'
+import applyActions from './applyActions'
 
 import './index.css'
-import Entity from './types/entity'
 
 const run = async () => {
   const renderer = new Renderer()
@@ -28,14 +30,8 @@ const run = async () => {
       const action = behaviourEngine.getAction(nextEntity.takesTurns!.behaviour, nextEntity)
       turnWaiting = !!action
 
-      if (action && action.type === 'moveTo') {
-        const entitiesAtLocation = world.positionMap.getAtPoint(action.payload)
-
-        if (entitiesAtLocation && entitiesAtLocation.some(e => e.collides)) {
-          action.cancelled = true
-        } else {
-          action.subject.moveTo(action.payload)
-        }
+      if (action) {
+        applyActions(world, processAction(world, action))
       }
     }
 

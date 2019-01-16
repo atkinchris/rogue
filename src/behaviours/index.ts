@@ -1,8 +1,7 @@
 import playerControlled from './playerControlled'
 import World from '../types/world'
 import Entity from '../types/entity'
-
-import Action from './action'
+import Action from '../types/action'
 
 class BehaviourEngine {
   world: World

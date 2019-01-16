@@ -1,7 +1,6 @@
 import World from '../types/world'
 import Entity from '../types/entity'
-
-import Action from './action'
+import Action from '../types/action'
 
 const getAction = (world: World, entity: Entity) => {
   const keys = world.inputHandler.getKeys()
