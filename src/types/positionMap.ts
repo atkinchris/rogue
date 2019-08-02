@@ -1,4 +1,4 @@
-import rbush from 'rbush'
+import RBush from 'rbush'
 
 import Entity from './entity'
 import Position from './position'
@@ -21,7 +21,7 @@ class PositionMap {
   public mapByPosition: Map<string, Set<Entity>>
 
   constructor() {
-    this.tree = rbush()
+    this.tree = new (RBush as any)()
     this.entriesById = new Map()
     this.mapByPosition = new Map()
   }

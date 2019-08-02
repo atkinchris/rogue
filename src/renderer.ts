@@ -63,7 +63,7 @@ class Renderer {
   public async load() {
     return new Promise((resolve, reject) => {
       try {
-        PIXI.loader.add('spritesheet.json').load(resolve)
+        this.app.loader.add('spritesheet.json').load(resolve)
       } catch (err) {
         reject(err)
       }
