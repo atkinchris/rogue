@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
+import InteractAction from '../actions/interact'
 import Action from '../types/action'
 import System from '../types/system'
 import World from '../types/world'
-import InteractAction from '../actions/interact'
 
 const bumpDoorsSystem: System = {
-  run: (world: World, actions: Action[]) =>
+  run: (_world: World, actions: Action[]) =>
     actions.reduce((out: Action[], action: Action) => {
       if (action instanceof InteractAction) {
         const door = action.targetEntities!.find(entity => !!entity.isDoor)

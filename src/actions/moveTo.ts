@@ -1,10 +1,10 @@
 import Action from '../types/action'
-import Position from '../types/position'
 import Entity from '../types/entity'
+import Position from '../types/position'
 
 class MoveToAction extends Action {
-  entity: Entity
-  destination: Position
+  public entity: Entity
+  public destination: Position
 
   constructor(entity: Entity, destination: Position) {
     super()

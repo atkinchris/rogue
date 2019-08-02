@@ -2,8 +2,8 @@ import Action from '../types/action'
 import Entity from '../types/entity'
 
 class Collision extends Action {
-  entity: Entity
-  collidesWith: Entity
+  public entity: Entity
+  public collidesWith: Entity
 
   constructor(entity: Entity, collidesWith: Entity) {
     super()

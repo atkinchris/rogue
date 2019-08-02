@@ -3,8 +3,8 @@ import Action from '../types/action'
 import System from '../types/system'
 import World from '../types/world'
 
-import MoveToAction from '../actions/moveTo'
 import CollisionAction from '../actions/collision'
+import MoveToAction from '../actions/moveTo'
 
 const collisionSystem: System = {
   run: (world: World, actions: Action[]) =>

@@ -1,15 +1,15 @@
-import EnergyQueue from './energyQueue'
 import InputHandler from '../inputHandler'
+import EnergyQueue from './energyQueue'
 import Entity from './entity'
 import PositionMap from './positionMap'
 
 import { neighboursToFrame, neighboursToRotation } from '../utils/neighbours'
 
 class World {
-  entities: Map<string, Entity>
-  energyQueue: EnergyQueue
-  inputHandler: InputHandler
-  positionMap: PositionMap
+  public entities: Map<string, Entity>
+  public energyQueue: EnergyQueue
+  public inputHandler: InputHandler
+  public positionMap: PositionMap
 
   constructor() {
     this.entities = new Map()
@@ -19,11 +19,11 @@ class World {
     this.positionMap = new PositionMap()
   }
 
-  handleEntityMoved(entity: Entity) {
+  public handleEntityMoved(entity: Entity) {
     this.positionMap.add(entity)
   }
 
-  addEntity(entity: Entity) {
+  public addEntity(entity: Entity) {
     this.entities.set(entity.id, entity)
 
     if (entity.position) {
@@ -35,11 +35,11 @@ class World {
     }
   }
 
-  getEntityById(id: string) {
+  public getEntityById(id: string) {
     return this.entities.get(id)
   }
 
-  updateSprites() {
+  public updateSprites() {
     this.entities.forEach(entity => {
       if (!entity.sprite) return
 

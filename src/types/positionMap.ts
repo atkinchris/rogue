@@ -16,9 +16,9 @@ interface PositionEntry {
 }
 
 class PositionMap {
-  tree: any
-  entriesById: Map<string, PositionEntry>
-  mapByPosition: Map<string, Set<Entity>>
+  public tree: any
+  public entriesById: Map<string, PositionEntry>
+  public mapByPosition: Map<string, Set<Entity>>
 
   constructor() {
     this.tree = rbush()
@@ -26,7 +26,7 @@ class PositionMap {
     this.mapByPosition = new Map()
   }
 
-  add(entity: Entity) {
+  public add(entity: Entity) {
     if (this.entriesById.has(entity.id)) {
       this.remove(entity)
     }
@@ -49,7 +49,7 @@ class PositionMap {
     this.mapByPosition.set(positionHash, set)
   }
 
-  remove(entity: Entity) {
+  public remove(entity: Entity) {
     const oldPosition = this.entriesById.get(entity.id)!
     this.tree.remove(oldPosition)
     this.entriesById.delete(entity.id)
@@ -62,12 +62,12 @@ class PositionMap {
     }
   }
 
-  getAtPoint(position: Position) {
+  public getAtPoint(position: Position) {
     const set = this.mapByPosition.get(positionToString(position))
     return set && Array.from(set)
   }
 
-  getInRectangle(x: number, y: number, width: number, height: number): PositionEntry[] {
+  public getInRectangle(x: number, y: number, width: number, height: number): PositionEntry[] {
     return this.tree.search({
       minX: x,
       minY: y,
@@ -76,7 +76,7 @@ class PositionMap {
     })
   }
 
-  getNeighbours(position: Position): PositionEntry[][] {
+  public getNeighbours(position: Position): PositionEntry[][] {
     const neighbours = this.getInRectangle(position.x - 1, position.y - 1, 3, 3)
 
     return [

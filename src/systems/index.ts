@@ -1,28 +1,28 @@
 import Action from '../types/action'
-import World from '../types/world'
 import System from '../types/system'
+import World from '../types/world'
 
-import interactionEntities from './interactionEntities'
-import collision from './collision'
 import bumpDoors from './bumpDoors'
+import collision from './collision'
 import interactDoors from './interactDoors'
+import interactionEntities from './interactionEntities'
 
 const systems = [interactionEntities, collision, bumpDoors, interactDoors]
 
 class ActionsEngine {
-  systems: System[]
-  world: World
+  public systems: System[]
+  public world: World
 
   constructor(world: World) {
     this.systems = systems
     this.world = world
   }
 
-  addSystem(system: System) {
+  public addSystem(system: System) {
     this.systems.push(system)
   }
 
-  run(action: Action) {
+  public run(action: Action) {
     return this.systems.reduce((actions, system) => system.run(this.world, actions), [action])
   }
 }

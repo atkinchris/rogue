@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import * as PIXI from 'pixi.js'
 
-import World from './types/world'
 import Entity from './types/entity'
+import World from './types/world'
 
 const DEBUG = false
 const TILE_SIZE = 32
@@ -13,13 +13,15 @@ const CAMERA_SIZE = {
 const TEXT_POOL_LIMIT = CAMERA_SIZE.WIDTH * CAMERA_SIZE.HEIGHT * 2
 
 class Renderer {
-  app: PIXI.Application
-  layers: Map<string, PIXI.Container>
-  textPool: PIXI.Text[]
-  textPoolIndex: number
+  public app: PIXI.Application
+  public layers: Map<string, PIXI.Container>
+  public textPool: PIXI.Text[]
+  public textPoolIndex: number
 
   constructor() {
-    const app = new PIXI.Application(CAMERA_SIZE.WIDTH * TILE_SIZE, CAMERA_SIZE.HEIGHT * TILE_SIZE, {
+    const app = new PIXI.Application({
+      width: CAMERA_SIZE.WIDTH * TILE_SIZE,
+      height: CAMERA_SIZE.HEIGHT * TILE_SIZE,
       transparent: true,
     })
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
@@ -48,7 +50,7 @@ class Renderer {
     this.textPoolIndex = 0
   }
 
-  getTextObject() {
+  public getTextObject() {
     this.textPoolIndex = this.textPoolIndex + 1
 
     if (this.textPoolIndex >= TEXT_POOL_LIMIT) {
@@ -58,7 +60,7 @@ class Renderer {
     return this.textPool[this.textPoolIndex]
   }
 
-  async load() {
+  public async load() {
     return new Promise((resolve, reject) => {
       try {
         PIXI.loader.add('spritesheet.json').load(resolve)
@@ -68,7 +70,7 @@ class Renderer {
     })
   }
 
-  render(world: World) {
+  public render(world: World) {
     this.layers.forEach(layer => layer.removeChildren())
 
     const cameraX = 0
@@ -91,7 +93,7 @@ class Renderer {
         position: { x, y },
         sprite: { name: spriteName, frame, layer = 'background', rotation = 0, flip },
       } = entity
-      const sprite = PIXI.Sprite.fromFrame(`${spriteName}_${frame || 0}`)
+      const sprite = PIXI.Sprite.from(`${spriteName}_${frame || 0}`)
       sprite.anchor.set(0.5)
       sprite.x = x * TILE_SIZE + 0.5 * TILE_SIZE
       sprite.y = y * TILE_SIZE + 0.5 * TILE_SIZE

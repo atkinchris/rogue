@@ -1,5 +1,5 @@
-import { v4 as uuid } from 'uuid'
 import EventEmitter from 'eventemitter3'
+import { v4 as uuid } from 'uuid'
 
 import Position from './position'
 import Sprite from './sprite'
@@ -19,13 +19,21 @@ interface TakesTurns {
 }
 
 class Entity extends EventEmitter {
-  id: string
+  public static create(world: World, options: EntityOptions) {
+    const entity = new Entity(options)
 
-  sprite: Sprite
-  collides: boolean
-  position: Position
-  takesTurns?: TakesTurns
-  isDoor?: boolean
+    world.addEntity(entity)
+    entity.on('entityMoved', e => world.handleEntityMoved(e))
+
+    return entity
+  }
+  public id: string
+
+  public sprite: Sprite
+  public collides: boolean
+  public position: Position
+  public takesTurns?: TakesTurns
+  public isDoor?: boolean
 
   constructor({ sprite, collides, position, takesTurns, isDoor }: EntityOptions) {
     super()
@@ -38,7 +46,7 @@ class Entity extends EventEmitter {
     this.isDoor = isDoor
   }
 
-  moveTo(position: Position) {
+  public moveTo(position: Position) {
     if (this.position.x < position.x) {
       this.sprite.flip = true
     }
@@ -50,15 +58,6 @@ class Entity extends EventEmitter {
     this.position = position
 
     super.emit('entityMoved', this)
-  }
-
-  static Create(world: World, options: EntityOptions) {
-    const entity = new Entity(options)
-
-    world.addEntity(entity)
-    entity.on('entityMoved', e => world.handleEntityMoved(e))
-
-    return entity
   }
 }
 

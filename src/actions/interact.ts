@@ -1,11 +1,11 @@
 import Action from '../types/action'
-import Position from '../types/position'
 import Entity from '../types/entity'
+import Position from '../types/position'
 
 class InteractAction extends Action {
-  entity: Entity
-  targetPosition?: Position
-  targetEntities?: Entity[]
+  public entity: Entity
+  public targetPosition?: Position
+  public targetEntities?: Entity[]
 
   constructor(entity: Entity, targetPosition?: Position, targetEntities?: Entity[]) {
     super()

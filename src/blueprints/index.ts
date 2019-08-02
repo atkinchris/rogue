@@ -1,9 +1,9 @@
 import Entity from '../types/entity'
-import World from '../types/world'
 import Position from '../types/position'
+import World from '../types/world'
 
 const createPlayer = (world: World, { x, y }: Position) =>
-  Entity.Create(world, {
+  Entity.create(world, {
     collides: true,
     position: { x, y },
     sprite: { name: 'player', layer: 'foreground' },
@@ -11,20 +11,20 @@ const createPlayer = (world: World, { x, y }: Position) =>
   })
 
 const createGrass = (world: World, { x, y }: Position) =>
-  Entity.Create(world, {
+  Entity.create(world, {
     position: { x, y },
     sprite: { name: 'grass', layer: 'background' },
   })
 
 const createWall = (world: World, { x, y }: Position) =>
-  Entity.Create(world, {
+  Entity.create(world, {
     position: { x, y },
     sprite: { name: 'wall', layer: 'background', isContinuous: true },
     collides: true,
   })
 
 const createDoor = (world: World, { x, y }: Position) =>
-  Entity.Create(world, {
+  Entity.create(world, {
     position: { x, y },
     sprite: { name: 'door', frame: 0, layer: 'foreground', fitsInWalls: true },
     collides: true,

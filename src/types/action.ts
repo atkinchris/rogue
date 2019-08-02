@@ -1,7 +1,7 @@
 class Action {
-  cancelled?: boolean
+  public cancelled?: boolean
 
-  cancel() {
+  public cancel() {
     this.cancelled = true
   }
 }

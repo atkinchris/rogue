@@ -2,7 +2,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -27,9 +27,14 @@ const common = {
   module: {
     rules: [
       {
-        test: [/\.jsx?$/, /\.tsx?$/],
-        exclude: /node_modules/,
-        use: 'babel-loader',
+        test: /\.tsx?$/,
+        use: ['babel-loader', 'ts-loader'],
+      },
+      {
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        exclude: [/node_modules/],
+        enforce: 'pre',
       },
       {
         test: /\.css$/,
@@ -62,7 +67,7 @@ const development = {
 const production = {
   mode: 'production',
   plugins: [
-    new CleanWebpackPlugin([paths.DEST]),
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),

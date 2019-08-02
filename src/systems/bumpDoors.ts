@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
+import CollisionAction from '../actions/collision'
+import InteractAction from '../actions/interact'
 import Action from '../types/action'
 import System from '../types/system'
 import World from '../types/world'
-import CollisionAction from '../actions/collision'
-import InteractAction from '../actions/interact'
 
 const bumpDoorsSystem: System = {
   run: (_world: World, actions: Action[]) =>

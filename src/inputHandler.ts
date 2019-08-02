@@ -8,8 +8,8 @@ interface Keys {
 }
 
 class InputHandler {
-  keys: Keys
-  newEvents: boolean
+  public keys: Keys
+  public newEvents: boolean
 
   constructor() {
     this.keys = {}
@@ -34,7 +34,7 @@ class InputHandler {
     })
   }
 
-  getKeys() {
+  public getKeys() {
     if (this.newEvents) {
       this.newEvents = false
       return this.keys

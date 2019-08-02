@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
+import InteractAction from '../actions/interact'
 import Action from '../types/action'
 import System from '../types/system'
 import World from '../types/world'
-import InteractAction from '../actions/interact'
 
 const bumpDoorsSystem: System = {
   run: (world: World, actions: Action[]) =>

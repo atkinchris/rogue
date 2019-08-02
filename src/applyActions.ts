@@ -1,8 +1,8 @@
-import World from './types/world'
-import Action from './types/action'
 import MoveToAction from './actions/moveTo'
+import Action from './types/action'
+import World from './types/world'
 
-const applyActions = (world: World, actions: Action[]) => {
+const applyActions = (_world: World, actions: Action[]) => {
   actions
     .filter(action => !action.cancelled)
     .forEach(action => {

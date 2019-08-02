@@ -1,8 +1,8 @@
-import World from '../types/world'
-import Entity from '../types/entity'
-import Action from '../types/action'
-import MoveToAction from '../actions/moveTo'
 import InteractAction from '../actions/interact'
+import MoveToAction from '../actions/moveTo'
+import Action from '../types/action'
+import Entity from '../types/entity'
+import World from '../types/world'
 
 const getAction = (world: World, entity: Entity): Action | null => {
   const keys = world.inputHandler.getKeys()

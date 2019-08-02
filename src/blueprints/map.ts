@@ -1,4 +1,4 @@
-import { createPlayer, createGrass, createWall, createDoor } from '.'
+import { createDoor, createGrass, createPlayer, createWall } from '.'
 import World from '../types/world'
 
 const MAP = [

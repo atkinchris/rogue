@@ -3,23 +3,23 @@ import Deque from 'double-ended-queue'
 import Entity from './entity'
 
 class EnergyQueue {
-  queue: Deque<Entity>
-  entities: Map<Entity, number>
+  public queue: Deque<Entity>
+  public entities: Map<Entity, number>
 
   constructor() {
     this.queue = new Deque()
     this.entities = new Map()
   }
 
-  add(entity: Entity) {
+  public add(entity: Entity) {
     this.entities.set(entity, 0)
   }
 
-  remove(entity: Entity) {
+  public remove(entity: Entity) {
     this.entities.delete(entity)
   }
 
-  next() {
+  public next() {
     if (this.queue.isEmpty()) {
       this.entities.forEach((speed, entity) => {
         const newSpeed = speed + 1

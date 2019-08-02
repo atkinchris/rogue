@@ -1,9 +1,9 @@
-import Renderer from './renderer'
+import applyActions from './applyActions'
 import BehaviourEngine from './behaviours'
 import buildMap from './blueprints/map'
-import World from './types/world'
+import Renderer from './renderer'
 import Entity from './types/entity'
-import applyActions from './applyActions'
+import World from './types/world'
 
 import './index.css'
 import ActionsEngine from './systems'

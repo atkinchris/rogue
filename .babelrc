@@ -1,14 +1,14 @@
 {
   "presets": [
+    "@babel/react",
+    "@babel/typescript",
     [
       "@babel/preset-env",
       {
-        "targets": {
-          "browsers": [">0.25%", "IE > 9", "not op_mini all"]
-        },
-        "useBuiltIns": "usage"
+        "useBuiltIns": "usage",
+        "modules": false,
+        "corejs": 3
       }
-    ],
-    "@babel/preset-typescript"
+    ]
   ]
 }
