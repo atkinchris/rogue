@@ -4,8 +4,26 @@ import * as PIXI from 'pixi.js'
 import Entity from './types/entity'
 import World from './types/world'
 
+interface Resource {
+  name: string
+  spritesheet: any
+  data: {
+    meta: Record<string, any>
+    frames: Record<
+      string,
+      {
+        frame: {
+          x: number
+          y: number
+          h: number
+          w: number
+        }
+      }
+    >
+  }
+}
+
 const DEBUG = false
-const TILE_SIZE = 32
 const CAMERA_SIZE = {
   WIDTH: 19,
   HEIGHT: 16,
@@ -17,11 +35,13 @@ class Renderer {
   public layers: Map<string, PIXI.Container>
   public textPool: PIXI.Text[]
   public textPoolIndex: number
+  private tileSize?: number
 
   constructor() {
     const app = new PIXI.Application({
-      width: CAMERA_SIZE.WIDTH * TILE_SIZE,
-      height: CAMERA_SIZE.HEIGHT * TILE_SIZE,
+      width: 0,
+      height: 0,
+      antialias: false,
       transparent: true,
     })
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
@@ -63,6 +83,28 @@ class Renderer {
   public async load() {
     return new Promise((resolve, reject) => {
       try {
+        this.app.loader.use((resource: Resource, next: () => void) => {
+          if (resource.name === 'spritesheet.json') {
+            const {
+              data: {
+                meta: { tileSize, margin },
+                frames,
+              },
+            } = resource
+            this.setupView(tileSize)
+
+            Object.values(frames).forEach(({ frame }) => {
+              frame.x = frame.x * tileSize + (frame.x - 1) * margin
+              frame.y = frame.y * tileSize + (frame.y - 1) * margin
+              frame.w = tileSize
+              frame.h = tileSize
+            })
+
+            resource.spritesheet.parse(next)
+          } else {
+            next()
+          }
+        })
         this.app.loader.add('spritesheet.json').load(resolve)
       } catch (err) {
         reject(err)
@@ -75,6 +117,7 @@ class Renderer {
 
     const cameraX = 0
     const cameraY = 0
+    const tileSize = this.tileSize!
 
     const entities = world.positionMap
       .getInRectangle(cameraX, cameraY, cameraX + CAMERA_SIZE.WIDTH, cameraY + CAMERA_SIZE.HEIGHT)
@@ -91,13 +134,12 @@ class Renderer {
     entities.forEach(entity => {
       const {
         position: { x, y },
-        sprite: { name: spriteName, frame, layer = 'background', rotation = 0, flip },
+        sprite: { name: spriteName, frame, layer = 'background', flip },
       } = entity
       const sprite = PIXI.Sprite.from(`${spriteName}_${frame || 0}`)
       sprite.anchor.set(0.5)
-      sprite.x = x * TILE_SIZE + 0.5 * TILE_SIZE
-      sprite.y = y * TILE_SIZE + 0.5 * TILE_SIZE
-      sprite.rotation = rotation
+      sprite.x = x * tileSize + 0.5 * tileSize
+      sprite.y = y * tileSize + 0.5 * tileSize
       sprite.scale.x = flip ? -1 : 1
 
       if (DEBUG && frame !== undefined) {
@@ -110,6 +152,12 @@ class Renderer {
     })
 
     this.app.render()
+  }
+
+  private setupView(tileSize: number) {
+    this.tileSize = tileSize
+    this.app.view.width = CAMERA_SIZE.WIDTH * this.tileSize
+    this.app.view.height = CAMERA_SIZE.HEIGHT * this.tileSize
   }
 }
 

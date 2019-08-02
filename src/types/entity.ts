@@ -48,11 +48,11 @@ class Entity extends EventEmitter {
 
   public moveTo(position: Position) {
     if (this.position.x < position.x) {
-      this.sprite.flip = true
+      this.sprite.flip = false
     }
 
     if (this.position.x > position.x) {
-      this.sprite.flip = false
+      this.sprite.flip = true
     }
 
     this.position = position

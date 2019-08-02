@@ -4,6 +4,5 @@ export default interface Sprite {
   layer?: string
   isContinuous?: boolean
   fitsInWalls?: boolean
-  rotation?: number
   flip?: boolean
 }

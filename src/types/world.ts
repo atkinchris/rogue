@@ -3,7 +3,7 @@ import EnergyQueue from './energyQueue'
 import Entity from './entity'
 import PositionMap from './positionMap'
 
-import { neighboursToFrame, neighboursToRotation } from '../utils/neighbours'
+import { neighboursToFrame } from '../utils/neighbours'
 
 class World {
   public entities: Map<string, Entity>
@@ -56,20 +56,6 @@ class World {
 
         // eslint-disable-next-line no-param-reassign
         entity.sprite.frame = frame
-      }
-
-      if (entity.sprite.fitsInWalls) {
-        const matchingNeighbours = this.positionMap
-          .getNeighbours(entity.position)
-          .map(
-            items =>
-              items.map(item => this.getEntityById(item.id)).filter(e => e && e.sprite.name === 'wall').length > 0
-          )
-
-        const rotation = neighboursToRotation(matchingNeighbours)
-
-        // eslint-disable-next-line no-param-reassign
-        entity.sprite.rotation = rotation
       }
     })
   }
